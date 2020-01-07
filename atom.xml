@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>coder67&#39;s blog</title>
+  <icon>https://coder67.cn/icon.png</icon>
+  <subtitle>Creating the world</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://coder67.cn/"/>
+  <updated>2020-01-06T15:34:44.401Z</updated>
+  <id>https://coder67.cn/</id>
+  
+  <author>
+    <name>Lu Qi</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>发布新文章</title>
+    <link href="https://coder67.cn/2020/01/06/%E5%8F%91%E5%B8%83%E6%96%B0%E6%96%87%E7%AB%A0/"/>
+    <id>https://coder67.cn/2020/01/06/%E5%8F%91%E5%B8%83%E6%96%B0%E6%96%87%E7%AB%A0/</id>
+    <published>2020-01-06T15:34:44.000Z</published>
+    <updated>2020-01-06T15:34:44.401Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>我的博客</title>
+    <link href="https://coder67.cn/2020/01/06/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/"/>
+    <id>https://coder67.cn/2020/01/06/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/</id>
+    <published>2020-01-06T11:01:09.000Z</published>
+    <updated>2020-01-06T11:01:09.577Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>article title</title>
+    <link href="https://coder67.cn/2020/01/06/article-title/"/>
+    <id>https://coder67.cn/2020/01/06/article-title/</id>
+    <published>2020-01-06T04:16:40.000Z</published>
+    <updated>2020-01-06T04:16:40.713Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://coder67.cn/2020/01/06/hello-world/"/>
+    <id>https://coder67.cn/2020/01/06/hello-world/</id>
+    <published>2020-01-06T03:58:46.170Z</published>
+    <updated>2020-01-06T03:58:46.170Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>jQuery对表单的操作及更多应用</title>
+    <link href="https://coder67.cn/2020/01/01/test/"/>
+    <id>https://coder67.cn/2020/01/01/test/</id>
+    <published>2020-01-01T04:12:57.000Z</published>
+    <updated>2020-01-06T14:12:12.675Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="web前端" scheme="https://coder67.cn/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="jQuery" scheme="https://coder67.cn/tags/jQuery/"/>
+    
+      <category term="表格" scheme="https://coder67.cn/tags/%E8%A1%A8%E6%A0%BC/"/>
+    
+      <category term="表单验证" scheme="https://coder67.cn/tags/%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81/"/>
+    
+  </entry>
+  
+</feed>
