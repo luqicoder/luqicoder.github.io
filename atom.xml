@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://coder67.cn/"/>
-  <updated>2020-01-07T08:44:00.877Z</updated>
+  <updated>2020-01-07T08:45:57.805Z</updated>
   <id>https://coder67.cn/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>第四篇测试文章</title>
+    <link href="https://coder67.cn/2020/01/07/%E7%AC%AC%E5%9B%9B%E7%AF%87%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
+    <id>https://coder67.cn/2020/01/07/%E7%AC%AC%E5%9B%9B%E7%AF%87%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</id>
+    <published>2020-01-07T08:45:57.000Z</published>
+    <updated>2020-01-07T08:45:57.805Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>第三篇测试文章</title>
