@@ -46,29 +46,32 @@
   };
 </script>
 
-  <meta name="description" content="真正的大师永远都怀着一颗学徒的心">
-<meta property="og:type" content="website">
-<meta property="og:title" content="coder67&#39;s blog">
-<meta property="og:url" content="https://coder67.cn/index.html">
+  <meta name="description" content="OpenCV库模块 opencv_core 模块包含库的核心功能，定义了图像数据结构的核心头文件 opencv_imgproc 模块 包含主要的图像处理函数 opencv_highgui 模块提供了读写图像和视频的函数以及一些用户交 互函数。 也可以只包含opencv2&#x2F;opencv.hpp这个头文件，它其中包含了基本上常用的的opencv头文件。  imread()函数 cv::imread()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCv入门之cvMat矩阵">
+<meta property="og:url" content="https://coder67.cn/2020/01/09/OpenCv%E5%85%A5%E9%97%A8%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C_1/index.html">
 <meta property="og:site_name" content="coder67&#39;s blog">
-<meta property="og:description" content="真正的大师永远都怀着一颗学徒的心">
+<meta property="og:description" content="OpenCV库模块 opencv_core 模块包含库的核心功能，定义了图像数据结构的核心头文件 opencv_imgproc 模块 包含主要的图像处理函数 opencv_highgui 模块提供了读写图像和视频的函数以及一些用户交 互函数。 也可以只包含opencv2&#x2F;opencv.hpp这个头文件，它其中包含了基本上常用的的opencv头文件。  imread()函数 cv::imread()">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-09T09:17:52.000Z">
+<meta property="article:modified_time" content="2020-01-09T09:18:06.923Z">
 <meta property="article:author" content="Lu Qi">
+<meta property="article:tag" content="opencv">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://coder67.cn/">
+<link rel="canonical" href="https://coder67.cn/2020/01/09/OpenCv%E5%85%A5%E9%97%A8%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C_1/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false
+    isHome: false,
+    isPost: true
   };
 </script>
 
-  <title>coder67's blog</title>
+  <title>OpenCv入门之cvMat矩阵 | coder67's blog</title>
   
 
 
@@ -209,10 +212,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://coder67.cn/2020/01/09/OpenCv%E5%85%A5%E9%97%A8%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -226,8 +229,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/09/OpenCv%E5%85%A5%E9%97%A8%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C_1/" class="post-title-link" itemprop="url">OpenCv入门之cvMat矩阵</a>
+          OpenCv入门之cvMat矩阵
         </h1>
 
         <div class="post-meta">
@@ -259,6 +261,13 @@
               </span>
               <span class="post-meta-item-text">阅读次数：</span>
               <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
             </span>
   
   <span class="post-meta-item">
@@ -298,7 +307,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="OpenCV库模块"><a href="#OpenCV库模块" class="headerlink" title="OpenCV库模块"></a>OpenCV库模块</h3><blockquote>
+        <h3 id="OpenCV库模块"><a href="#OpenCV库模块" class="headerlink" title="OpenCV库模块"></a>OpenCV库模块</h3><blockquote>
 <p><strong>opencv_core</strong> 模块包含库的核心功能，定义了图像数据结构的核心头文件</p>
 <p><strong>opencv_imgproc</strong> 模块 包含主要的图像处理函数</p>
 <p><strong>opencv_highgui</strong> 模块提供了读写图像和视频的函数以及一些用户交 互函数。<br> 也可以只包含<strong>opencv2/opencv.hpp</strong>这个头文件，它其中包含了基本上常用的的opencv头文件。</p>
@@ -311,456 +320,30 @@
 <p><strong>注意</strong>：使用imshow 显示由整数（CV_16U 表示 16位无符号整数，CV_32S 表示 32位有符号整数）构成的图像时，图像每个像素的值会被除以 256，以便能够在 256级灰度中显示。同样，在 显示由浮点数构成的图像时，值的范围会被假设为 0.0（显示黑色）~1.0（显示白色）。超出这个 范围的值会显示为白色（大于 1.0的值）或黑色（小于 0.0的值）。</p>
 </blockquote>
 <h3 id="实例-对图像的简单操作"><a href="#实例-对图像的简单操作" class="headerlink" title="实例-对图像的简单操作"></a>实例-对图像的简单操作</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/core.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/highgui.hpp&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//创建一副0*0的空图像</span></span><br><span class="line">	cv::Mat <span class="built_in">image</span>; </span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"the image's rows:"</span> &lt;&lt; <span class="built_in">image</span>.rows &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span> &lt;&lt; <span class="string">"the image's cols:"</span> &lt;&lt; <span class="built_in">image</span>.cols &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span> &lt;&lt; <span class="string">"the image's size:"</span> &lt;&lt; <span class="built_in">image</span>.<span class="built_in">size</span>() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//重新读取一幅图像</span></span><br><span class="line">	<span class="built_in">image</span> = cv::imread(<span class="string">"D:\\code_space\\images\\test.jpg"</span>);</span><br><span class="line">	<span class="comment">//错误处理</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">image</span>.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"未能加载图像！"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"the image's rows:"</span> &lt;&lt; <span class="built_in">image</span>.rows &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span> &lt;&lt; <span class="string">"the image's cols:"</span> &lt;&lt; <span class="built_in">image</span>.cols &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span> &lt;&lt; <span class="string">"the image's size:"</span> &lt;&lt; <span class="built_in">image</span>.<span class="built_in">size</span>() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//图像显示</span></span><br><span class="line">	cv::imshow(<span class="string">"Show Window"</span>, <span class="built_in">image</span>);</span><br><span class="line">	<span class="comment">//也可自定义窗口名字</span></span><br><span class="line">	cv::namedWindow(<span class="string">"Show Window2"</span>);</span><br><span class="line">	<span class="comment">//由于控制台窗口下，main()函数结束时就会关闭，因此需要额外增加一个highgui函数，待用户键入数值后结束程序</span></span><br><span class="line">	<span class="comment">//0表示永远等待按键，键入正数表示等待毫秒数</span></span><br><span class="line">	cv::waitKey(<span class="number">0</span>);</span><br><span class="line">	<span class="comment">//图像处理</span></span><br><span class="line">	cv::Mat result;</span><br><span class="line">	<span class="comment">//cv::flip(src,dst,orientation)用于图像翻转</span></span><br><span class="line">	<span class="comment">//orientation,=0表示垂直,正数表示水平，负数表示水平与垂直</span></span><br><span class="line">	cv::flip(<span class="built_in">image</span>, result, <span class="number">0</span>);</span><br><span class="line">	cv::imshow(<span class="string">"0"</span>, result);</span><br><span class="line">	cv::flip(<span class="built_in">image</span>, result, <span class="number">1</span>);</span><br><span class="line">	cv::imshow(<span class="string">"1"</span>, result);</span><br><span class="line">	cv::flip(<span class="built_in">image</span>, result, <span class="number">-1</span>);</span><br><span class="line">	cv::imshow(<span class="string">"-1"</span>, result);</span><br><span class="line">	cv::waitKey(<span class="number">0</span>);</span><br><span class="line">	<span class="comment">//图像保存</span></span><br><span class="line">	cv::imwrite(<span class="string">"-1.jpg"</span>, result);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/opencv/" rel="tag"># opencv</a>
+          </div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/2020/01/09/OpenCv%E5%85%A5%E9%97%A8%E4%B9%8BcvMat%E7%9F%A9%E9%98%B5_2/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/09/OpenCv%E5%85%A5%E9%97%A8%E4%B9%8BcvMat%E7%9F%A9%E9%98%B5_2/" class="post-title-link" itemprop="url">OpenCv入门之cvMat矩阵</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-09 17:00:36 / 修改时间：17:16:44" itemprop="dateCreated datePublished" datetime="2020-01-09T17:00:36+08:00">2020-01-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index">
-                    <span itemprop="name">图像处理</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/01/09/OpenCv%E5%85%A5%E9%97%A8%E4%B9%8BcvMat%E7%9F%A9%E9%98%B5_2/" class="post-meta-item leancloud_visitors" data-flag-title="OpenCv入门之cvMat矩阵" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/01/09/OpenCv%E5%85%A5%E9%97%A8%E4%B9%8BcvMat%E7%9F%A9%E9%98%B5_2/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/09/OpenCv%E5%85%A5%E9%97%A8%E4%B9%8BcvMat%E7%9F%A9%E9%98%B5_2/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在opencv中，加载的图像数据存储在cv:Mat这个类中。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/09/OpenCv%E5%85%A5%E9%97%A8%E4%B9%8BcvMat%E7%9F%A9%E9%98%B5_2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/09/OpenCv%E5%85%A5%E9%97%A8%E4%B9%8BcvMat%E7%9F%A9%E9%98%B5_2/" rel="prev" title="OpenCv入门之cvMat矩阵">
+      <i class="fa fa-chevron-left"></i> OpenCv入门之cvMat矩阵
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/2020/01/07/%E5%9C%A8C++%E4%B8%AD%E9%81%8D%E5%8E%86%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%89%B9%E5%AE%9A%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/07/%E5%9C%A8C++%E4%B8%AD%E9%81%8D%E5%8E%86%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%89%B9%E5%AE%9A%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">C++中遍历某个文件夹下特定格式的文件</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-07 20:21:57 / 修改时间：20:24:29" itemprop="dateCreated datePublished" datetime="2020-01-07T20:21:57+08:00">2020-01-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/01/07/%E5%9C%A8C++%E4%B8%AD%E9%81%8D%E5%8E%86%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%89%B9%E5%AE%9A%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%96%87%E4%BB%B6/" class="post-meta-item leancloud_visitors" data-flag-title="C++中遍历某个文件夹下特定格式的文件" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
     
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/01/07/%E5%9C%A8C++%E4%B8%AD%E9%81%8D%E5%8E%86%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%89%B9%E5%AE%9A%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%96%87%E4%BB%B6/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/07/%E5%9C%A8C++%E4%B8%AD%E9%81%8D%E5%8E%86%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%89%B9%E5%AE%9A%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%96%87%E4%BB%B6/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近写C++程序时，需要用到遍历某个文件夹下特定格式的文件。网上参考了许多代码，这里找到了知乎上一篇比较详细的文章介绍。参考了他的代码，但是源代码不能使用，下面做出修改。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/07/%E5%9C%A8C++%E4%B8%AD%E9%81%8D%E5%8E%86%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%89%B9%E5%AE%9A%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%96%87%E4%BB%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/2020/01/06/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/06/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-06 11:58:46" itemprop="dateCreated datePublished" datetime="2020-01-06T11:58:46+08:00">2020-01-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-07 19:52:38" itemprop="dateModified" datetime="2020-01-07T19:52:38+08:00">2020-01-07</time>
-              </span>
-
-          
-            <span id="/2020/01/06/hello-world/" class="post-meta-item leancloud_visitors" data-flag-title="Hello World" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/01/06/hello-world/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/06/hello-world/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>357</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/06/hello-world/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/2020/01/01/jQuery%E5%AF%B9%E8%A1%A8%E5%8D%95%E7%9A%84%E6%93%8D%E4%BD%9C%E5%8F%8A%E6%9B%B4%E5%A4%9A%E5%BA%94%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/01/jQuery%E5%AF%B9%E8%A1%A8%E5%8D%95%E7%9A%84%E6%93%8D%E4%BD%9C%E5%8F%8A%E6%9B%B4%E5%A4%9A%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">jQuery对表单的操作及更多应用</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-01 12:12:57" itemprop="dateCreated datePublished" datetime="2020-01-01T12:12:57+08:00">2020-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 22:12:12" itemprop="dateModified" datetime="2020-01-06T22:12:12+08:00">2020-01-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web前端</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/01/01/jQuery%E5%AF%B9%E8%A1%A8%E5%8D%95%E7%9A%84%E6%93%8D%E4%BD%9C%E5%8F%8A%E6%9B%B4%E5%A4%9A%E5%BA%94%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="jQuery对表单的操作及更多应用" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/01/01/jQuery%E5%AF%B9%E8%A1%A8%E5%8D%95%E7%9A%84%E6%93%8D%E4%BD%9C%E5%8F%8A%E6%9B%B4%E5%A4%9A%E5%BA%94%E7%94%A8/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/01/jQuery%E5%AF%B9%E8%A1%A8%E5%8D%95%E7%9A%84%E6%93%8D%E4%BD%9C%E5%8F%8A%E6%9B%B4%E5%A4%9A%E5%BA%94%E7%94%A8/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
   </article>
   
   
@@ -768,12 +351,10 @@
 
   </div>
 
-  
-
-
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -820,6 +401,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenCV库模块"><span class="nav-number">1.</span> <span class="nav-text">OpenCV库模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imread-函数"><span class="nav-number">2.</span> <span class="nav-text">imread()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例-对图像的简单操作"><span class="nav-number">3.</span> <span class="nav-text">实例-对图像的简单操作</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
