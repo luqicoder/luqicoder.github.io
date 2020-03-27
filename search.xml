@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>利用VS code配置Java环境</title>
+    <url>/2020/03/27/%E5%88%A9%E7%94%A8VS%20code%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>环境配置</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>利用QSignalMapper为无参数的信号函数增加参数传递</title>
     <url>/2020/03/18/%E5%88%A9%E7%94%A8QSignalMapper%E4%B8%BA%E6%97%A0%E5%8F%82%E6%95%B0%E7%9A%84%E4%BF%A1%E5%8F%B7%E5%87%BD%E6%95%B0%E5%A2%9E%E5%8A%A0%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</url>
     <content><![CDATA[]]></content>
