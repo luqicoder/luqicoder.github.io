@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>test</title>
-    <url>/2020/05/16/test/</url>
+    <title>C++中遍历某个文件夹下特定格式的文件</title>
+    <url>/2020/05/16/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%92%8C%E5%9B%A0%E7%89%B9%E7%BD%91/</url>
     <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/05/16/hello-world/</url>
-    <content><![CDATA[]]></content>
+      <categories>
+        <category>计算机网络：自顶向下</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+      </tags>
   </entry>
   <entry>
     <title>利用VS code配置Java环境</title>
@@ -64,19 +65,6 @@
       </categories>
       <tags>
         <tag>文件操作</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>jQuery对表单的操作及更多应用</title>
-    <url>/2020/01/01/jQuery%E5%AF%B9%E8%A1%A8%E5%8D%95%E7%9A%84%E6%93%8D%E4%BD%9C%E5%8F%8A%E6%9B%B4%E5%A4%9A%E5%BA%94%E7%94%A8/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>jQuery</tag>
-        <tag>表格</tag>
-        <tag>表单验证</tag>
       </tags>
   </entry>
 </search>
