@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://coder67.cn/"/>
-  <updated>2020-05-27T01:55:16.772Z</updated>
+  <updated>2020-06-03T15:39:57.738Z</updated>
   <id>https://coder67.cn/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>利用quicker快速上传图片到图床(阿里云oss)</title>
+    <link href="https://coder67.cn/2020/06/03/%E5%88%A9%E7%94%A8quicker%E5%BF%AB%E9%80%9F%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E5%9B%BE%E5%BA%8A(%E9%98%BF%E9%87%8C%E4%BA%91oss)/"/>
+    <id>https://coder67.cn/2020/06/03/%E5%88%A9%E7%94%A8quicker%E5%BF%AB%E9%80%9F%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E5%9B%BE%E5%BA%8A(%E9%98%BF%E9%87%8C%E4%BA%91oss)/</id>
+    <published>2020-06-03T14:26:09.000Z</published>
+    <updated>2020-06-03T15:39:57.738Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>&emsp;&emsp;通过quicker设置一组动作，实现快速截取图片并上传到阿里云的oss。</p><a id="more"></a><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>&emsp;&emsp;一直都想解决如何快速上传图片到图床问题。以前每次写博客的时候，需要插入图片的时都是先把图片截取下来，保存到本地，然后通过网页的方式上传到阿里云，最后再获取上传的图片链接。通过这一系列的步骤，其实让人感觉挺麻烦的，所以自己都尽量避免在博客中插入图片。<br>&emsp;&emsp;quicker是不久前才接触到，当时是为了解决论文翻译的问题（这里强烈安利一波沙拉查词+quicker的方式，真的是看英文文献的神器）。quicker有点像脚本精灵的意思，通过组合一系列动作，以达到快速完成某个任务的目的。下面可以看下动作效果。</p><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/gif/aliyun_oss_gif.gif" alt="aliyun" style="text-align:center; zoom:50%; " align="center" /><h2 id="ToDo"><a href="#ToDo" class="headerlink" title="ToDo"></a>ToDo</h2><ul><li>[]   实现本地文件上传</li><li>[]   实现网络链接图片上传</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;序言&quot;&gt;&lt;a href=&quot;#序言&quot; class=&quot;headerlink&quot; title=&quot;序言&quot;&gt;&lt;/a&gt;序言&lt;/h2&gt;&lt;p&gt;&amp;emsp;&amp;emsp;通过quicker设置一组动作，实现快速截取图片并上传到阿里云的oss。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="阿里云" scheme="https://coder67.cn/categories/%E9%98%BF%E9%87%8C%E4%BA%91/"/>
+    
+    
+      <category term="oss" scheme="https://coder67.cn/tags/oss/"/>
+    
+  </entry>
   
   <entry>
     <title>C++获取系统的时间.md</title>
