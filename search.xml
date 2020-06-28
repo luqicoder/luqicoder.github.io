@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>第十一章 关联容器</title>
+    <url>/posts/cfc183de.html</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++Primer笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第十章 泛型算法</title>
     <url>/posts/bcf3d99d.html</url>
     <content><![CDATA[]]></content>
