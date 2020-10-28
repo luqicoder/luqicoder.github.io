@@ -46,12 +46,12 @@
   };
 </script>
 
-  <meta name="description" content="序言&amp;emsp;&amp;emsp;C++ Primer笔记第十一章：关联容器。">
+  <meta name="description" content="&amp;emsp;&amp;emsp;C++ Primer笔记第十一章：关联容器。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第十一章 关联容器">
 <meta property="og:url" content="https://coder67.cn/posts/cfc183de.html">
 <meta property="og:site_name" content="coder67&#39;s blog">
-<meta property="og:description" content="序言&amp;emsp;&amp;emsp;C++ Primer笔记第十一章：关联容器。">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;C++ Primer笔记第十一章：关联容器。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200622/20200622105938.jpg">
 <meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200624/20200624101934.jpg">
@@ -70,7 +70,7 @@
 <meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628215256.jpg">
 <meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628224902.jpg">
 <meta property="article:published_time" content="2020-06-22T02:47:30.000Z">
-<meta property="article:modified_time" content="2020-06-28T15:10:13.664Z">
+<meta property="article:modified_time" content="2020-10-28T14:36:39.169Z">
 <meta property="article:author" content="Lu Qi">
 <meta property="article:tag" content="C++Primer笔记">
 <meta name="twitter:card" content="summary">
@@ -263,7 +263,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-28 23:10:13" itemprop="dateModified" datetime="2020-06-28T23:10:13+08:00">2020-06-28</time>
+                <time title="修改时间：2020-10-28 22:36:39" itemprop="dateModified" datetime="2020-10-28T22:36:39+08:00">2020-10-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -323,7 +323,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>&emsp;&emsp;C++ Primer笔记第十一章：关联容器。</p>
+        <p>&emsp;&emsp;C++ Primer笔记第十一章：关联容器。</p>
 <a id="more"></a>
 
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p><strong>顺序容器与关联容器差异</strong>：顺序容器中的元素是按它们在容器中的位置来顺序保存和访问的，关联容器中的元素是按关键字来保存和访问的。<br><strong>map</strong>：map中的元素为关键字-值；关键字起索引作用，值表示与索引相关联的数据。<br><strong>set</strong>：set中的元素只包含一个关键字，set是关键字的简单集合。<br>标准库类型提供8种关联容器。map和multimap定义在头文件map中;set和multiset定义在头文件set中:无序容器定义在头文件 unordered_map和 unordered_set中。<br>8种关联容器差别体现在：</p>
@@ -549,7 +549,7 @@ insert(或 emplace)返回一个pair，pair的 first成员是一个迭代器,指�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#序言"><span class="nav-number">1.</span> <span class="nav-text">序言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用关联容器"><span class="nav-number">2.1.</span> <span class="nav-text">使用关联容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联容器概述"><span class="nav-number">2.2.</span> <span class="nav-text">关联容器概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义关联容器"><span class="nav-number">2.2.1.</span> <span class="nav-text">定义关联容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关键字类型要求"><span class="nav-number">2.2.2.</span> <span class="nav-text">关键字类型要求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pair类型"><span class="nav-number">2.2.3.</span> <span class="nav-text">pair类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联容器操作"><span class="nav-number">2.3.</span> <span class="nav-text">关联容器操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关联容器迭代器"><span class="nav-number">2.3.1.</span> <span class="nav-text">关联容器迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加元素"><span class="nav-number">2.3.2.</span> <span class="nav-text">添加元素</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">3.</span> <span class="nav-text">练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4"><span class="nav-number">3.1.</span> <span class="nav-text">1-4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-8"><span class="nav-number">3.2.</span> <span class="nav-text">5-8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-11"><span class="nav-number">3.3.</span> <span class="nav-text">9-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-14"><span class="nav-number">3.4.</span> <span class="nav-text">12-14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#37-38"><span class="nav-number">3.5.</span> <span class="nav-text">37-38</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">1.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用关联容器"><span class="nav-number">1.1.</span> <span class="nav-text">使用关联容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联容器概述"><span class="nav-number">1.2.</span> <span class="nav-text">关联容器概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义关联容器"><span class="nav-number">1.2.1.</span> <span class="nav-text">定义关联容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关键字类型要求"><span class="nav-number">1.2.2.</span> <span class="nav-text">关键字类型要求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pair类型"><span class="nav-number">1.2.3.</span> <span class="nav-text">pair类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联容器操作"><span class="nav-number">1.3.</span> <span class="nav-text">关联容器操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关联容器迭代器"><span class="nav-number">1.3.1.</span> <span class="nav-text">关联容器迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加元素"><span class="nav-number">1.3.2.</span> <span class="nav-text">添加元素</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">2.</span> <span class="nav-text">练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4"><span class="nav-number">2.1.</span> <span class="nav-text">1-4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-8"><span class="nav-number">2.2.</span> <span class="nav-text">5-8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-11"><span class="nav-number">2.3.</span> <span class="nav-text">9-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-14"><span class="nav-number">2.4.</span> <span class="nav-text">12-14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#37-38"><span class="nav-number">2.5.</span> <span class="nav-text">37-38</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
