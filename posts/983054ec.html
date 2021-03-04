@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"coder67.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;02-启动、中断、异常和系统调用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="启动、中断、异常和系统调用">
+<meta property="og:url" content="https://coder67.cn/posts/983054ec.html">
+<meta property="og:site_name" content="coder67&#39;s blog">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;02-启动、中断、异常和系统调用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224204117.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224204618.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224204914.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224213458.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224213514.jpg">
+<meta property="article:published_time" content="2021-03-04T13:52:00.000Z">
+<meta property="article:modified_time" content="2021-03-04T14:06:01.292Z">
+<meta property="article:author" content="Lu Qi">
+<meta property="article:tag" content="清华操作系统课程笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224204117.jpg">
+
+<link rel="canonical" href="https://coder67.cn/posts/983054ec.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>启动、中断、异常和系统调用 | coder67's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="coder67's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder67's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">与君初相识，犹如故人归</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/luqicoder" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/983054ec.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lu Qi">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder67's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          启动、中断、异常和系统调用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-04 21:52:00 / 修改时间：22:06:01" itemprop="dateCreated datePublished" datetime="2021-03-04T21:52:00+08:00">2021-03-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/posts/983054ec.html#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" id="/posts/983054ec.html" data-xid="/posts/983054ec.html" itemprop="commentCount"></span>
+    </a>
+ </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&emsp;&emsp;<a href="https://www.bilibili.com/video/BV1uW411f72n" target="_blank" rel="noopener">清华大学计算机操作系统课程笔记</a><br>&emsp;&emsp;02-启动、中断、异常和系统调用</p>
+<a id="more"></a>
+
+
+<h2 id="一、操作系统的启动"><a href="#一、操作系统的启动" class="headerlink" title="一、操作系统的启动"></a>一、操作系统的启动</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>DISK:存放OS；<br>BIOS：基本I/O处理系统( basic I/O system); （通电后，让计算机系统检测各种外设，然后才能加载相应软件执行）<br>Bootloader: 加载OS到内存中。<br><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224204117.jpg" alt="20210224204117" style="zoom:50%;" /><br>当电脑通电时，段寄存器CS和指令寄存器IP能够确定一个内存地址，例如CS:IP = 0xf000:fff0.<br>POST(加电自检)，寻找显卡和执行BIOS。(显示器，键盘…是否正常)。<br><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224204618.jpg" alt="20210224204618" style="zoom:50%;" /><br>BIOS: 将Bootloader从磁盘的磁盘的引导扇区(512字节)加载到0x7c00；跳转到CS:IP=0000:7c00的内存区域(以便下一步)<br>Bootloader：将操作系统的代码和数据从硬盘加载到内存中；跳转到操作系统的起始地址。<br><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224204914.jpg" alt="20210224204914" style="zoom:50%;" /></p>
+<h3 id="具体启动流程"><a href="#具体启动流程" class="headerlink" title="具体启动流程"></a>具体启动流程</h3><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224213458.jpg" alt="20210224213458" style="zoom:50%;" />
+
+<h4 id="BIOS自检"><a href="#BIOS自检" class="headerlink" title="BIOS自检"></a>BIOS自检</h4><p>在计算机开机时，boot被自动执行，指引CPU把操作系统从大容量存储器中传送到主存储器的易失区  。BIOS的功能由两部分组成，分别是POST码和Runtime服务。POST阶段完成后它将从存储器中被清除，而Runtime服务会被一直保留，用于目标操作系统的启动。BIOS两个阶段所做的详细工作如下：</p>
+<p><strong>步骤1</strong>：上电自检POST(Power-on self test)，主要负责检测系统外围关键设备（如：CPU、内存、显卡、I/O、键盘鼠标等）是否正常。例如，最常见的是内存松动的情况，BIOS自检阶段会报错，系统就无法启动起来；</p>
+<p><strong>步骤2</strong>：步骤1成功后，便会执行一段小程序用来枚举本地设备并对其初始化。这一步主要是根据我们在BIOS中设置的系统启动顺序来搜索用于启动系统的驱动器，如硬盘、光盘、U盘、软盘和网络等。我们以硬盘启动为例，BIOS此时去读取硬盘驱动器的第一个扇区(MBR，512字节)，然后执行里面的代码。实际上这里BIOS并不关心启动设备第一个扇区中是什么内容，它只是负责读取该扇区内容、并执行。</p>
+<p>至此，BIOS的任务就完成了，此后将系统启动的控制权移交到MBR部分的代码。</p>
+<p>Linux的启动是从0xFFFF0地址开始的，该地址位于FLASH memory中，是BIOS的入口。然后会选择引导设将其第一个扇面（可能是MBR或GRUB）的内容读到0x7C00处，并跳转到该位置。</p>
+<h4 id="系统引导"><a href="#系统引导" class="headerlink" title="系统引导"></a>系统引导</h4><p>我们首先来了解一下MBR，它是Master Boot Record的缩写。硬盘的0柱面、0磁头、1扇区称为主引导扇区。它由三个部分组成，主引导程序(Bootloader)、 硬盘分区表DPT（Disk Partition table）和硬盘有效标志（55AA），其结构图如下所示 ：</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224213514.jpg" alt="20210224213514" style="zoom:50%;" />
+
+<p>引导程序的核心工作是将内核从外存读入内存，并将其放在合适的位置中。</p>
+<p>由于处理器最开始运行在实模式下，内存空间只有1MB（20位地址总线8086体系）</p>
+<p>引导程序必须将内核的实模式下的初始化程序放在基本内存中，应将内核镜像放在1MB以上的位置。</p>
+<p>同时为了缩减内核规模，实现内核的灵活性和适应性，内核被分为两部分：基础部分（bzImage）和扩展部分（busybox等）。基本内核实现内核最基本的管理功能，不随计算机的变化而变化；扩展功能实现内核一些独立的模块（如驱动和文件系统），会发生变化，被放在initrd中，需要引导程序一并读入。在qemu中使用 qemu-systems-i386 -kernel bzImage -initrd busybox命令载入基本内核和扩展内核。</p>
+<h4 id="启动内核"><a href="#启动内核" class="headerlink" title="启动内核"></a>启动内核</h4><p>当处理器离开引导程序的时候，它处于实模式下面，需要执行实模式下面的引导程序后，跳转到保护模式解压内核镜像。</p>
+<p>在实模式中，引导程序进行三项工作：</p>
+<p>1）收集系统参数</p>
+<p>2）设置基本环境</p>
+<p>3）切换处理器操作模式</p>
+<h4 id="解压内核"><a href="#解压内核" class="headerlink" title="解压内核"></a>解压内核</h4><p>linux在内存中的为内存镜像，需要进行解压，解压后需要把内核放在适当的位置。这个位置在老的版本为0x100000（1MB）处，新版本要求在物理内存的0x1000000（16MB）处，这样可以节省16MB以下的内存空间给DMA使用。借此就进入了保护模式的内核初始化下了。</p>
+<h2 id="二、-中断、异常和系统调用"><a href="#二、-中断、异常和系统调用" class="headerlink" title="二、 中断、异常和系统调用"></a>二、 中断、异常和系统调用</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ul>
+<li>系统调用 ( system call，来源于应用程序 ):<ul>
+<li>应用程序主动向操作系统发出服务请求</li>
+</ul>
+</li>
+<li>异常 ( exception ，来源于不良应用程序):<ul>
+<li>异常也称内中断，非法指令或者其他坏的处理状态(如:内存出错)</li>
+</ul>
+</li>
+<li>中断 ( hardware interrupt，来源于外设 ):<ul>
+<li>来源于不同的硬件设备的计时器和网络中断</li>
+</ul>
+</li>
+</ul>
+<p>为什么应用程序不能直接访问硬件而是通过操作系统？</p>
+<ul>
+<li>计算机运行时，内核是被信任的第三方。</li>
+<li>只有内核可以执行特权指令。</li>
+<li>为了方便应用程序。</li>
+</ul>
+<p>讨论问题：</p>
+<ul>
+<li>操作系统如何设计和实现中断，异常和系统调用；</li>
+<li>他们三者的区别和特点。</li>
+</ul>
+<h3 id="三者的区别和特点"><a href="#三者的区别和特点" class="headerlink" title="三者的区别和特点"></a>三者的区别和特点</h3><h4 id="产生的源头"><a href="#产生的源头" class="headerlink" title="产生的源头"></a>产生的源头</h4><ul>
+<li>中断：外设(键盘/鼠标/网卡/声卡/显卡，可以产生各种事件)</li>
+<li>异常：应用程序意想不到的行为(e.g.异常，恶意程序，应用程序需要的资源未得到满足)</li>
+<li>系统调用(system call)：应用程序请求操作提供服务(e.g.打开/关闭/读写文件，发送网络包)</li>
+</ul>
+<h4 id="处理时间"><a href="#处理时间" class="headerlink" title="处理时间"></a>处理时间</h4><ul>
+<li>中断：异步；（应用程序不知道什么时候产生）</li>
+<li>异常：同步；（执行某条特殊指令后一定产生，比如，除0）</li>
+<li>系统调用：同步或异步。（执行某条特殊指令，触发系统调用请求）</li>
+</ul>
+<h4 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h4><ul>
+<li>中断：持续，对用户应用程序时透明的</li>
+<li>异常：杀死或者重新执行意想不到的应用程序指令</li>
+<li>系统调用：等待和持续</li>
+</ul>
+<h3 id="中断和异常处理机制"><a href="#中断和异常处理机制" class="headerlink" title="中断和异常处理机制"></a>中断和异常处理机制</h3><p>中断是外设的事件，异常是CPU的事件；<br>中断和异常迫使CPU访问一些被中断和异常服务访问的功能。</p>
+<h4 id="中断处理机制"><a href="#中断处理机制" class="headerlink" title="中断处理机制"></a>中断处理机制</h4><p>硬件：设置中断标记(CPU初始化)</p>
+<ul>
+<li>将内部/外部事件设置中断标记；</li>
+<li>中断事件的ID(程序访问的中断向量地址)</li>
+</ul>
+<p>软件(操作系统)：</p>
+<ul>
+<li>保存当前处理状态</li>
+<li>中断服务程序处理</li>
+<li>清除中断标记</li>
+<li>恢复之前保存的处理状态</li>
+</ul>
+<h4 id="异常处理机制"><a href="#异常处理机制" class="headerlink" title="异常处理机制"></a>异常处理机制</h4><p>异常：异常编号</p>
+<ul>
+<li>保存现场</li>
+<li>异常处理：<ul>
+<li>杀死产生异常的程序；</li>
+<li>重新执行异常指令</li>
+</ul>
+</li>
+<li>恢复现场</li>
+</ul>
+<h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><ul>
+<li>一条指令会触发一个系统调用<ul>
+<li>prinf()语句会调用系统的write()</li>
+</ul>
+</li>
+<li>程序访问主要是通过高层次的API接口而不是直接进行系统调用。</li>
+<li>通常情况下，存在与每个系统调用相关的序号<ul>
+<li>系统调用接口根据这些序号来维护表的索引。</li>
+</ul>
+</li>
+<li>系统调用接口调用内核态中预期的系统调用<ul>
+<li>并返回系统调用的状态和其它任何返回值。</li>
+</ul>
+</li>
+<li>用户不需要知道系统调用是如何实现的，只需要获取API和了解操作新系统将什么作为返回结果。操作系统接口的细节大部分都隐藏在API中，并通过运行程序支持的库来管理。</li>
+</ul>
+<h3 id="用户态，内核态（核心态）"><a href="#用户态，内核态（核心态）" class="headerlink" title="用户态，内核态（核心态）"></a>用户态，内核态（核心态）</h3><ul>
+<li>用户态：应用程序在执行的过程中，CPU执行的特权级的状态(很低，不能访问特殊机器指令和IO)。</li>
+<li>内核态：应用程序在执行的过程中，CPU执行的特权级的状态(高，操作系统可以执行CPU任何一条指令)。</li>
+<li>系统调用时涉及到特权级从用户态到内核态的转换，应用程序和操作系统有各自的堆栈，这两个变化比函数调用的开销更大，但更安全和可靠。(而程序调用是在一个栈空间实现参数的调用和返回)。</li>
+</ul>
+<h3 id="中断的概念和作用"><a href="#中断的概念和作用" class="headerlink" title="中断的概念和作用"></a>中断的概念和作用</h3><p>发生了中断,就意味着需要操作系统介入,开展管理工作。 由于操作系统的管理工作(比如进程切换、分配I/O设备等)需要使用特权指令,因此CPU要从用户态转为核心态。 中断可以使CPU从用户态切换为核心态,使操作系统获得计算机的控制权。有了中断才能实现多道程序并发执行。 中断是CPU从用户态-&gt;核心态切换的唯一途径。 核心态-&gt;用户态切换只需要执行一个特权指令，将PSW设置为0</p>
+<h3 id="系统调用的概念和作用"><a href="#系统调用的概念和作用" class="headerlink" title="系统调用的概念和作用"></a>系统调用的概念和作用</h3><p>系统调用”是操作系统提供给应用程序(程序员/编程人员)使用的接口,可以理解为一种可供应用程序调用的特殊函数,应用程序可以发出系统调用请求来获得操作系统的服务。 应用程序通过系统调用请求操作系统的服务。 系统中的各种共享资源都由操作系统统一掌管,因此在用户程序中,凡是与资源有关的操作(如存储分配、I/O操作、文件管理等) ,都必须通过系统调用的方式向操作系统提出服务请求,由操作系统代为完成。这样可以保证系统的稳定性和安全性,防止用户进行非法操作。 系统调用相关的处理需要在内核态下完成。</p>
+<h4 id="跨越操作系统边界的开销"><a href="#跨越操作系统边界的开销" class="headerlink" title="跨越操作系统边界的开销"></a>跨越操作系统边界的开销</h4><p>在执行时间上超过程序调用</p>
+<h5 id="开销包括："><a href="#开销包括：" class="headerlink" title="开销包括："></a>开销包括：</h5><ul>
+<li>建立中断/异常/系统调用号与对应服务例程映射关系的初始化开销；</li>
+<li>建立内核堆栈(操作系统和应用程序的堆栈不一样)；</li>
+<li>验证参数(操作系统会检查数据)；</li>
+<li>内核态映射到用户态的地址空间，更新页面映射权限(内存拷贝开销)；</li>
+<li>内核态独立地址空间TLB</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B8%85%E5%8D%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="tag"># 清华操作系统课程笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/f55dd124.html" rel="prev" title="计算机操作系统概述">
+      <i class="fa fa-chevron-left"></i> 计算机操作系统概述
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、操作系统的启动"><span class="nav-number">1.</span> <span class="nav-text">一、操作系统的启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述"><span class="nav-number">1.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体启动流程"><span class="nav-number">1.2.</span> <span class="nav-text">具体启动流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BIOS自检"><span class="nav-number">1.2.1.</span> <span class="nav-text">BIOS自检</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统引导"><span class="nav-number">1.2.2.</span> <span class="nav-text">系统引导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动内核"><span class="nav-number">1.2.3.</span> <span class="nav-text">启动内核</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解压内核"><span class="nav-number">1.2.4.</span> <span class="nav-text">解压内核</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、-中断、异常和系统调用"><span class="nav-number">2.</span> <span class="nav-text">二、 中断、异常和系统调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">2.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三者的区别和特点"><span class="nav-number">2.2.</span> <span class="nav-text">三者的区别和特点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#产生的源头"><span class="nav-number">2.2.1.</span> <span class="nav-text">产生的源头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理时间"><span class="nav-number">2.2.2.</span> <span class="nav-text">处理时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应"><span class="nav-number">2.2.3.</span> <span class="nav-text">响应</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断和异常处理机制"><span class="nav-number">2.3.</span> <span class="nav-text">中断和异常处理机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#中断处理机制"><span class="nav-number">2.3.1.</span> <span class="nav-text">中断处理机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异常处理机制"><span class="nav-number">2.3.2.</span> <span class="nav-text">异常处理机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用"><span class="nav-number">2.4.</span> <span class="nav-text">系统调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户态，内核态（核心态）"><span class="nav-number">2.5.</span> <span class="nav-text">用户态，内核态（核心态）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断的概念和作用"><span class="nav-number">2.6.</span> <span class="nav-text">中断的概念和作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用的概念和作用"><span class="nav-number">2.7.</span> <span class="nav-text">系统调用的概念和作用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#跨越操作系统边界的开销"><span class="nav-number">2.7.1.</span> <span class="nav-text">跨越操作系统边界的开销</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#开销包括："><span class="nav-number">2.7.1.1.</span> <span class="nav-text">开销包括：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lu Qi"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lu Qi</p>
+  <div class="site-description" itemprop="description">真正的大师永远都怀着一颗学徒的心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luqicoder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luqicoder" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:luqicoder@foxmail.com" title="E-Mail → mailto:luqicoder@foxmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备19002966号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lu Qi</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">86k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:18</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#waline-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/@waline/client/dist/Waline.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Waline({
+      el            : '#waline-comments',
+      serverURL     : 'https://vercel-kohl-seven.vercel.app',
+      placeholder   : "Just go go！！！",
+      path          : location.pathname,
+      avatar        : 'mm',
+      meta          : guest,
+      pageSize      : '10' || 10,
+      lang          : 'zh-cn' || 'zh-cn',
+      visitor       : false,
+      highlight     : false,
+      avatarForce   : false,
+      emojiCDN      : '',
+      emojiMaps     : "",
+      requiredFields: ""
+    });
+  }, window.Waline);
+});
+</script>
+</body>
+</html>
