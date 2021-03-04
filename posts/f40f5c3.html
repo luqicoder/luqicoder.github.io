@@ -222,20 +222,6 @@
   
   <span class="post-meta-item">
     
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/posts/f40f5c3.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/f40f5c3.html" data-xid="/posts/f40f5c3.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-  
-  <span class="post-meta-item">
-    
       <span class="post-meta-item-icon">
         <i class="far fa-comment"></i>
       </span>
@@ -243,20 +229,6 @@
     
     <a title="valine" href="/posts/f40f5c3.html#valine-comments" itemprop="discussionUrl">
       <span class="post-comments-count valine-comment-count" data-xid="/posts/f40f5c3.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/posts/f40f5c3.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/f40f5c3.html" data-xid="/posts/f40f5c3.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -377,20 +349,7 @@
 
           </div>
           
-      <div class="tabs tabs-comment">
-        <ul class="nav-tabs">
-            <li class="tab"><a href="#comment-valine">valine</a></li>
-            <li class="tab"><a href="#comment-waline">waline</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane valine" id="comment-valine">
-              <div class="comments" id="valine-comments"></div>
-            </div>
-            <div class="tab-pane waline" id="comment-waline">
-              <div class="comments" id="waline-comments"></div>
-            </div>
-        </div>
-      </div>
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -606,33 +565,5 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
 });
 </script>
 
-
-<script>
-NexT.utils.loadComments(document.querySelector('#waline-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/@waline/client/dist/Waline.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Waline({
-      el            : '#waline-comments',
-      serverURL     : 'https://vercel-kohl-seven.vercel.app',
-      placeholder   : "Just go go",
-      path          : location.pathname,
-      avatar        : 'mm',
-      meta          : guest,
-      pageSize      : '10' || 10,
-      lang          : 'zh-cn' || 'zh-cn',
-      visitor       : false,
-      highlight     : false,
-      avatarForce   : false,
-      emojiCDN      : '',
-      emojiMaps     : "",
-      requiredFields: []
-    });
-  }, window.Waline);
-});
-</script>
 </body>
 </html>
