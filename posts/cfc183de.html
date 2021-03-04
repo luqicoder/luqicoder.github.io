@@ -231,50 +231,7 @@
                 </span>
             </span>
 
-          
-            <span id="/posts/cfc183de.html" class="post-meta-item leancloud_visitors" data-flag-title="第十一章 关联容器" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/posts/cfc183de.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/cfc183de.html" data-xid="/posts/cfc183de.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span id="/posts/cfc183de.html" class="post-meta-item leancloud_visitors" data-flag-title="第十一章 关联容器" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/posts/cfc183de.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/cfc183de.html" data-xid="/posts/cfc183de.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
+          <br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
@@ -463,7 +420,6 @@ insert(或 emplace)返回一个pair，pair的 first成员是一个迭代器,指�
 
           </div>
           
-    <div class="comments" id="waline-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -650,33 +606,5 @@ insert(或 emplace)返回一个pair，pair的 first成员是一个迭代器,指�
 
   
 
-
-<script>
-NexT.utils.loadComments(document.querySelector('#waline-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/@waline/client/dist/Waline.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Waline({
-      el            : '#waline-comments',
-      serverURL     : 'https://vercel-kohl-seven.vercel.app',
-      placeholder   : "Just go go",
-      path          : location.pathname,
-      avatar        : 'mm',
-      meta          : guest,
-      pageSize      : '10' || 10,
-      lang          : 'zh-cn' || 'zh-cn',
-      visitor       : true,
-      highlight     : false,
-      avatarForce   : false,
-      emojiCDN      : '',
-      emojiMaps     : "",
-      requiredFields: []
-    });
-  }, window.Waline);
-});
-</script>
 </body>
 </html>
