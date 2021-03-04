@@ -20,29 +20,17 @@
     var CONFIG = {"hostname":"coder67.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="最近在看HeadFirst设计模式，其中代码都是Java写的。虽然大学时候学过一部分Java，但是基本没怎么用，忘得差不多了。这段时间根据廖雪峰Java教程学习，同时也记录下Vs code下的java安装。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="利用VS code配置Java环境">
-<meta property="og:url" content="https://coder67.cn/posts/db2efac8.html">
+  <meta name="description" content="真正的大师永远都怀着一颗学徒的心">
+<meta property="og:type" content="website">
+<meta property="og:title" content="coder67&#39;s blog">
+<meta property="og:url" content="https://coder67.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="coder67&#39;s blog">
-<meta property="og:description" content="最近在看HeadFirst设计模式，其中代码都是Java写的。虽然大学时候学过一部分Java，但是基本没怎么用，忘得差不多了。这段时间根据廖雪峰Java教程学习，同时也记录下Vs code下的java安装。">
+<meta property="og:description" content="真正的大师永远都怀着一颗学徒的心">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://coder67.cn/images/%E5%88%A9%E7%94%A8VS%20code%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83%20(7).png">
-<meta property="og:image" content="https://coder67.cn/images/%E5%88%A9%E7%94%A8VS%20code%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83%20(8).png">
-<meta property="og:image" content="https://coder67.cn/images/%E5%88%A9%E7%94%A8VS%20code%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83%20(1).png">
-<meta property="og:image" content="https://coder67.cn/images/%E5%88%A9%E7%94%A8VS%20code%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83%20(2).png">
-<meta property="og:image" content="https://coder67.cn/images/%E5%88%A9%E7%94%A8VS%20code%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83%20(3).png">
-<meta property="og:image" content="https://coder67.cn/images/%E5%88%A9%E7%94%A8VS%20code%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83%20(4).png">
-<meta property="og:image" content="https://coder67.cn/images/%E5%88%A9%E7%94%A8VS%20code%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83%20(5).png">
-<meta property="og:image" content="https://coder67.cn/images/%E5%88%A9%E7%94%A8VS%20code%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83%20(6).png">
-<meta property="article:published_time" content="2020-03-27T03:54:57.000Z">
-<meta property="article:modified_time" content="2020-10-28T14:43:37.160Z">
 <meta property="article:author" content="Lu Qi">
-<meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://coder67.cn/images/%E5%88%A9%E7%94%A8VS%20code%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83%20(7).png">
 
-<link rel="canonical" href="https://coder67.cn/posts/db2efac8.html">
+<link rel="canonical" href="https://coder67.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
 
 
 <script id="page-configurations">
@@ -50,12 +38,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>利用VS code配置Java环境 | coder67's blog</title>
+  <title>分类: 数据结构与算法 | coder67's blog</title>
   
 
 
@@ -174,161 +162,57 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content category">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/db2efac8.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          利用VS code配置Java环境
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-27 11:54:57" itemprop="dateCreated datePublished" datetime="2020-03-27T11:54:57+08:00">2020-03-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-28 22:43:37" itemprop="dateModified" datetime="2020-10-28T22:43:37+08:00">2020-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
   
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/posts/db2efac8.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/db2efac8.html" data-xid="/posts/db2efac8.html" itemprop="commentCount"></span>
-    </a>
- </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>574</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">数据结构与算法
+          <small>分类</small>
+        </h2>
+      </div>
 
       
-        <p><em>最近在看HeadFirst设计模式，其中代码都是Java写的。虽然大学时候学过一部分Java，但是基本没怎么用，忘得差不多了。这段时间根据<a href="https://www.liaoxuefeng.com/wiki/1252599548343744" target="_blank" rel="noopener">廖雪峰Java教程</a>学习，同时也记录下Vs code下的java安装。</em></p>
- <a id="more"></a>
-
-<h3 id="1-安装VS-code"><a href="#1-安装VS-code" class="headerlink" title="1.安装VS code"></a>1.安装VS code</h3><p>​    从<a href="https://code.visualstudio.com/下载vscode。" target="_blank" rel="noopener">https://code.visualstudio.com/下载vscode。</a></p>
-<h3 id="2-安装Java-extension-Pack插件"><a href="#2-安装Java-extension-Pack插件" class="headerlink" title="2.安装Java extension Pack插件"></a>2.安装Java extension Pack插件</h3><img src="/images/利用VS code配置Java环境 (7).png" alt="头像" style="zoom: 50%;" />
-
-<h3 id="3-配置jdk环境"><a href="#3-配置jdk环境" class="headerlink" title="3.配置jdk环境"></a>3.配置jdk环境</h3><p>​    Java extension Pack插件安装完毕后会自动跳转到Configure java Runtimes页面，并检测当前环境是否存在JDK。如果没有存在的话，可以看到下方提供有下载按钮，进行jdk安装。</p>
-<p>​    打开下载的安装程序，点击下一步，勾选设置JAVA_HOME_VARIABLE。</p>
-<img src="/images/利用VS code配置Java环境 (8).png" alt="头像" style="zoom: 40%;" />
-
-<img src="/images/利用VS code配置Java环境 (1).png" alt="头像" style="zoom: 40%;" />
-
-<img src="/images/利用VS code配置Java环境 (2).png" alt="头像" style="zoom:40%;" />
-
-<h3 id="4-运行java程序"><a href="#4-运行java程序" class="headerlink" title="4.运行java程序"></a>4.运行java程序</h3><p>​    首先需要重启vscode，打开一个新的文件夹。</p>
-<img src="/images/利用VS code配置Java环境 (3).png" alt="头像" style="zoom:33%;" />
-
-<p>在文件夹中新建一个Hello.java文件。</p>
-<img src="/images/利用VS code配置Java环境 (4).png" alt="利用VS code配置Java环境 (6)" style="zoom:50%;" />
-
-<img src="/images/利用VS code配置Java环境 (5).png" alt="头像" style="zoom:50%;" />
-
-<p>​    输入以下代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello, world!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    然后有右键运行，输出结果。</p>
-<img src="/images/利用VS code配置Java环境 (6).png" alt="头像" style="zoom:33%;" />
-
-<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="https://code.visualstudio.com/docs/java/java-tutorial" target="_blank" rel="noopener">https://code.visualstudio.com/docs/java/java-tutorial</a></p>
-
+    <div class="collection-year">
+      <span class="collection-header">2021</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag"># 环境配置</a>
-          </div>
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-03-04T21:26:50+08:00"
+              content="2021-03-04">
+          03-04
+        </time>
+      </div>
 
-        
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/48533112.html" itemprop="url">
+            <span itemprop="name">Leetcode刷题笔记.md</span>
+          </a>
+      </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/3b7c2f70.html" rel="prev" title="利用QSignalMapper为无参数的信号函数增加参数传递">
-      <i class="fa fa-chevron-left"></i> 利用QSignalMapper为无参数的信号函数增加参数传递
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/f40f5c3.html" rel="next" title="第一章-计算机网络和因特网">
-      第一章-计算机网络和因特网 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+    </div>
+  </div>
   
   
+  
+
   
 
 
 
           </div>
           
-    <div class="comments" id="waline-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -375,7 +259,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装VS-code"><span class="nav-number">1.</span> <span class="nav-text">1.安装VS code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装Java-extension-Pack插件"><span class="nav-number">2.</span> <span class="nav-text">2.安装Java extension Pack插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置jdk环境"><span class="nav-number">3.</span> <span class="nav-text">3.配置jdk环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-运行java程序"><span class="nav-number">4.</span> <span class="nav-text">4.运行java程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考："><span class="nav-number">5.</span> <span class="nav-text">参考：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

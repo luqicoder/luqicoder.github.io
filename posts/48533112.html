@@ -20,30 +20,91 @@
     var CONFIG = {"hostname":"coder67.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="真正的大师永远都怀着一颗学徒的心">
-<meta property="og:type" content="website">
-<meta property="og:title" content="coder67&#39;s blog">
-<meta property="og:url" content="https://coder67.cn/index.html">
+  <meta name="description" content="&amp;emsp;&amp;emsp;目前刷题进度(46&#x2F;300)，刷题笔记结合了极客时间的算法课程。 正文数组Access：O(1)Insert：平均O(n)  (最坏O(N), 最好O(1))Delete：平均O(n) (最坏O(N), 最好O(1)) 两数之和https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;two-sum&#x2F;思路：暴力法O(n²)或者哈希表(O(1)) 链表append：O">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode刷题笔记.md">
+<meta property="og:url" content="https://coder67.cn/posts/48533112.html">
 <meta property="og:site_name" content="coder67&#39;s blog">
-<meta property="og:description" content="真正的大师永远都怀着一颗学徒的心">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;目前刷题进度(46&#x2F;300)，刷题笔记结合了极客时间的算法课程。 正文数组Access：O(1)Insert：平均O(n)  (最坏O(N), 最好O(1))Delete：平均O(n) (最坏O(N), 最好O(1)) 两数之和https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;two-sum&#x2F;思路：暴力法O(n²)或者哈希表(O(1)) 链表append：O">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.leetcode-cn.com/866b404c6b0b52fa02385e301ee907fc015742c3766c80c02e24ef3a8613e5ad-k%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.png">
+<meta property="og:image" content="https://coder67.cn/posts/_v_images/20210223193942265_12830.png">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303101646.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303103116.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303104303.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303105340.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303110901.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224152316.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224163529.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210225/20210225082047.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210225/20210225083042.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210225/20210225083449.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210225/20210225090851.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210225/20210225112534.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226084512.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226084917.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226095358.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226095621.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226095841.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226110133.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226151503.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226151627.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226152009.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226152511.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226152533.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226160521.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226163233.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226164544.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210227/20210227090444.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210227/20210227091254.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210227/20210227091332.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210227/20210227093523.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210227/20210227093634.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210227/20210227094037.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210227/20210227093856.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210227/20210227100049.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210227/20210227111326.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210227/20210227141430.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210227/20210227163244.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210227/20210227172424.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210228/20210228110755.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210228/20210228112648.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210228/20210228140331.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210228/20210228162833.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210301/20210301085230.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210301/20210301090122.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210301/20210301093731.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210301/20210301094038.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210301/20210301094247.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210301/20210301162332.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210301/20210301162745.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210301/20210301184903.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210302/20210302092036.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210302/20210302102816.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210302/20210302145714.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210302/20210302145937.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210302/20210302150349.jpg">
+<meta property="article:published_time" content="2021-03-04T13:26:50.000Z">
+<meta property="article:modified_time" content="2021-03-04T13:32:03.587Z">
 <meta property="article:author" content="Lu Qi">
+<meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.leetcode-cn.com/866b404c6b0b52fa02385e301ee907fc015742c3766c80c02e24ef3a8613e5ad-k%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.png">
 
-<link rel="canonical" href="https://coder67.cn/">
+<link rel="canonical" href="https://coder67.cn/posts/48533112.html">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>coder67's blog</title>
+  <title>Leetcode刷题笔记.md | coder67's blog</title>
   
 
 
@@ -162,9 +223,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -180,10 +242,9 @@
       <meta itemprop="name" content="coder67's blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/48533112.html" class="post-title-link" itemprop="url">Leetcode刷题笔记.md</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Leetcode刷题笔记.md
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -244,7 +305,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>&emsp;&emsp;目前刷题进度(46/300)，刷题笔记结合了极客时间的<a href="https://time.geekbang.org/course/intro/100019701" target="_blank" rel="noopener">算法课程</a>。</p>
+        <p>&emsp;&emsp;目前刷题进度(46/300)，刷题笔记结合了极客时间的<a href="https://time.geekbang.org/course/intro/100019701" target="_blank" rel="noopener">算法课程</a>。</p>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>Access：O(1)<br>Insert：平均O(n)  (最坏O(N), 最好O(1))<br>Delete：平均O(n) (最坏O(N), 最好O(1))</p>
 <h3 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h3><p><a href="https://leetcode-cn.com/problems/two-sum/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/two-sum/</a><br>思路：暴力法O(n²)或者<strong>哈希表(O(1))</strong></p>
 <h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><p>append：O(1)<br>LookUp：O(n)<br>Insert：O(1)<br>Delete：O(1)</p>
@@ -504,1016 +565,40 @@
 <p>去dicuss看别人算法</p>
 <p>算法和数据结构是内力<br>重在练习（修行）</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/cfc183de.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/cfc183de.html" class="post-title-link" itemprop="url">第十一章 关联容器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-22 10:47:30" itemprop="dateCreated datePublished" datetime="2020-06-22T10:47:30+08:00">2020-06-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-28 22:50:46" itemprop="dateModified" datetime="2020-10-28T22:50:46+08:00">2020-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/posts/cfc183de.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/cfc183de.html" data-xid="/posts/cfc183de.html" itemprop="commentCount"></span>
-    </a>
- </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>14k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>13 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&emsp;&emsp;C++ Primer笔记第十一章：关联容器。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/cfc183de.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/d1061479.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/d1061479.html" class="post-title-link" itemprop="url">Hexo博客优化(Next主题)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-14 14:46:33" itemprop="dateCreated datePublished" datetime="2020-06-14T14:46:33+08:00">2020-06-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-04 21:19:50" itemprop="dateModified" datetime="2021-03-04T21:19:50+08:00">2021-03-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/posts/d1061479.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/d1061479.html" data-xid="/posts/d1061479.html" itemprop="commentCount"></span>
-    </a>
- </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&emsp;&emsp;Next7.8.0主题优化</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/d1061479.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/cfc183de.html" rel="prev" title="第十一章 关联容器">
+      <i class="fa fa-chevron-left"></i> 第十一章 关联容器
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
   
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/bcf3d99d.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/bcf3d99d.html" class="post-title-link" itemprop="url">第十章 泛型算法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-05 23:46:40" itemprop="dateCreated datePublished" datetime="2020-06-05T23:46:40+08:00">2020-06-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-28 22:36:04" itemprop="dateModified" datetime="2020-10-28T22:36:04+08:00">2020-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/posts/bcf3d99d.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/bcf3d99d.html" data-xid="/posts/bcf3d99d.html" itemprop="commentCount"></span>
-    </a>
- </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>11k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>10 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&emsp;&emsp;C++primer笔记第十章：泛型算法。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/bcf3d99d.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/b85c29e7.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/b85c29e7.html" class="post-title-link" itemprop="url">利用quicker快速上传图片到图床(阿里云oss)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-03 22:26:09" itemprop="dateCreated datePublished" datetime="2020-06-03T22:26:09+08:00">2020-06-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-30 17:11:54" itemprop="dateModified" datetime="2020-10-30T17:11:54+08:00">2020-10-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%BF%E9%87%8C%E4%BA%91/" itemprop="url" rel="index"><span itemprop="name">阿里云</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/posts/b85c29e7.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/b85c29e7.html" data-xid="/posts/b85c29e7.html" itemprop="commentCount"></span>
-    </a>
- </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&emsp;&emsp;通过quicker设置一组动作，实现快速截取图片并上传到阿里云的oss。</p>
-<p>&emsp;&emsp;quicker链接：<a href="https://getquicker.net/Sharedaction?code=c4896807-9b84-46e9-7d97-08d808171f98" target="_blank" rel="noopener">链接地址</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/b85c29e7.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/43bb7ef5.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/43bb7ef5.html" class="post-title-link" itemprop="url">第九章-顺序容器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-29 10:21:14" itemprop="dateCreated datePublished" datetime="2020-05-29T10:21:14+08:00">2020-05-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-28 22:39:48" itemprop="dateModified" datetime="2020-10-28T22:39:48+08:00">2020-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/posts/43bb7ef5.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/43bb7ef5.html" data-xid="/posts/43bb7ef5.html" itemprop="commentCount"></span>
-    </a>
- </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>26k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>24 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&emsp;&emsp;C++Primer第九章-顺序容器的笔记。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/43bb7ef5.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/da7b895e.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/da7b895e.html" class="post-title-link" itemprop="url">C++获取系统的时间</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-27 09:42:36" itemprop="dateCreated datePublished" datetime="2020-05-27T09:42:36+08:00">2020-05-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-28 22:39:57" itemprop="dateModified" datetime="2020-10-28T22:39:57+08:00">2020-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/posts/da7b895e.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/da7b895e.html" data-xid="/posts/da7b895e.html" itemprop="commentCount"></span>
-    </a>
- </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>703</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>实现了一个函数在Windows下利用C++代码获取系统时间，以字符的形式返回。<br>IDE:VS2019</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/da7b895e.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/fa26f953.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/fa26f953.html" class="post-title-link" itemprop="url">利用Vnote写Hexo博客.md</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-27 09:16:01" itemprop="dateCreated datePublished" datetime="2020-05-27T09:16:01+08:00">2020-05-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-28 22:40:54" itemprop="dateModified" datetime="2020-10-28T22:40:54+08:00">2020-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/posts/fa26f953.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/fa26f953.html" data-xid="/posts/fa26f953.html" itemprop="commentCount"></span>
-    </a>
- </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>838</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&emsp;&emsp;前面一直使用的是Typroa用来记笔记，写markdown博客。Typroa所见即所得，界面清晰明了，是很好的写文档的工具。但对我而言，还存在几点不足之处。<br>&emsp;&emsp;我一般是同步整理笔记，同时将不错的笔记上传到博客。Typroa没有很好的笔记归档方式，只能依赖自己创建文件夹的方式进行归档整理。<br>&emsp;&emsp;此外，上传博客一般有固定格式。我并没有使用hexo命令的方式创建博客文档，而博客文档有对固定的YAML Front Matter，其中记录了博客标题，创建修改时间，分类，标签等。因此每次需要手动添加这些脚注，既然这些都是固定的格式，能否添加使用一种模板。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/fa26f953.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/f40f5c3.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/f40f5c3.html" class="post-title-link" itemprop="url">第一章-计算机网络和因特网</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-16 21:48:07" itemprop="dateCreated datePublished" datetime="2020-05-16T21:48:07+08:00">2020-05-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-22 17:02:11" itemprop="dateModified" datetime="2020-06-22T17:02:11+08:00">2020-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/" itemprop="url" rel="index"><span itemprop="name">计算机网络：自顶向下</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/posts/f40f5c3.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/f40f5c3.html" data-xid="/posts/f40f5c3.html" itemprop="commentCount"></span>
-    </a>
- </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-1-什么是因特网"><a href="#1-1-什么是因特网" class="headerlink" title="1.1 什么是因特网"></a>1.1 什么是因特网</h2><p><strong>主机</strong>或者<strong>端系统</strong>（与因特网相连的计算机或者其他设备）</p>
-<p><strong>端系统</strong>通过<strong>通信链路(物理媒体)</strong>和<strong>分组交换</strong>机连接到一起</p>
-<p>链路<strong>传输速率</strong>：bit/s(bps)</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/f40f5c3.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/db2efac8.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/db2efac8.html" class="post-title-link" itemprop="url">利用VS code配置Java环境</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-27 11:54:57" itemprop="dateCreated datePublished" datetime="2020-03-27T11:54:57+08:00">2020-03-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-28 22:43:37" itemprop="dateModified" datetime="2020-10-28T22:43:37+08:00">2020-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/posts/db2efac8.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/db2efac8.html" data-xid="/posts/db2efac8.html" itemprop="commentCount"></span>
-    </a>
- </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>574</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><em>最近在看HeadFirst设计模式，其中代码都是Java写的。虽然大学时候学过一部分Java，但是基本没怎么用，忘得差不多了。这段时间根据<a href="https://www.liaoxuefeng.com/wiki/1252599548343744" target="_blank" rel="noopener">廖雪峰Java教程</a>学习，同时也记录下Vs code下的java安装。</em></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/db2efac8.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
           </div>
           
+    <div class="comments" id="waline-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -1560,6 +645,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">1.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">2.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#两数之和"><span class="nav-number">2.1.</span> <span class="nav-text">两数之和</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表"><span class="nav-number">3.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#反转链表-206"><span class="nav-number">3.1.</span> <span class="nav-text">反转链表(206)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两两交换链表中的节点-24"><span class="nav-number">3.2.</span> <span class="nav-text">两两交换链表中的节点(24)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环形链表-141"><span class="nav-number">3.3.</span> <span class="nav-text">环形链表(141)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环形链表2-142"><span class="nav-number">3.4.</span> <span class="nav-text">环形链表2(142)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K个一组翻转链表-25"><span class="nav-number">3.5.</span> <span class="nav-text">K个一组翻转链表(25)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两数之和，三数之和-15-，四数之和-18"><span class="nav-number">4.</span> <span class="nav-text">两数之和，三数之和(15)，四数之和(18)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆栈，队列"><span class="nav-number">5.</span> <span class="nav-text">堆栈，队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#括号合法-20"><span class="nav-number">5.1.</span> <span class="nav-text">括号合法(20)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈实现队列-232"><span class="nav-number">5.2.</span> <span class="nav-text">栈实现队列(232)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队列实现栈-225"><span class="nav-number">5.3.</span> <span class="nav-text">队列实现栈(225)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优先队列"><span class="nav-number">6.</span> <span class="nav-text">优先队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#返回数据流中第k大元素-703"><span class="nav-number">6.1.</span> <span class="nav-text">返回数据流中第k大元素(703)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回滑动窗口最大值-239"><span class="nav-number">6.2.</span> <span class="nav-text">返回滑动窗口最大值(239)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希表"><span class="nav-number">7.</span> <span class="nav-text">哈希表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有效的字母异位词"><span class="nav-number">7.1.</span> <span class="nav-text">有效的字母异位词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两数之和-1"><span class="nav-number">7.2.</span> <span class="nav-text">两数之和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三数之和"><span class="nav-number">7.3.</span> <span class="nav-text">三数之和</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数，二叉树，二叉搜索数"><span class="nav-number">8.</span> <span class="nav-text">数，二叉树，二叉搜索数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归分治"><span class="nav-number">9.</span> <span class="nav-text">递归分治</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#50Pow-x-n"><span class="nav-number">9.1.</span> <span class="nav-text">50Pow(x,n)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#169求众数"><span class="nav-number">9.2.</span> <span class="nav-text">169求众数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贪心算法"><span class="nav-number">10.</span> <span class="nav-text">贪心算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#122-买卖股票"><span class="nav-number">10.1.</span> <span class="nav-text">122(买卖股票)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFS和DFS"><span class="nav-number">11.</span> <span class="nav-text">BFS和DFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树层次遍历-102"><span class="nav-number">11.1.</span> <span class="nav-text">二叉树层次遍历(102)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的最大和最小深度-104-111"><span class="nav-number">11.2.</span> <span class="nav-text">二叉树的最大和最小深度(104,111)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#剪枝"><span class="nav-number">12.</span> <span class="nav-text">剪枝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成括号-22"><span class="nav-number">12.1.</span> <span class="nav-text">生成括号(22)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#N皇后-51-52"><span class="nav-number">12.2.</span> <span class="nav-text">N皇后(51,52)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数独-36-37"><span class="nav-number">12.3.</span> <span class="nav-text">数独(36,37)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二分查找"><span class="nav-number">13.</span> <span class="nav-text">二分查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#求解平方根-69"><span class="nav-number">13.1.</span> <span class="nav-text">求解平方根(69)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二分法"><span class="nav-number">13.1.1.</span> <span class="nav-text">二分法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#牛顿迭代法"><span class="nav-number">13.1.2.</span> <span class="nav-text">牛顿迭代法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典树"><span class="nav-number">14.</span> <span class="nav-text">字典树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本性质"><span class="nav-number">14.1.</span> <span class="nav-text">基本性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现Trie-前缀树，208"><span class="nav-number">14.2.</span> <span class="nav-text">实现Trie(前缀树，208)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单词搜索II-212-79-I"><span class="nav-number">14.3.</span> <span class="nav-text">单词搜索II(212,79(I))</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位运算"><span class="nav-number">15.</span> <span class="nav-text">位运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是位运算"><span class="nav-number">15.1.</span> <span class="nav-text">什么是位运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位运算符"><span class="nav-number">15.2.</span> <span class="nav-text">位运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XOR（异或）"><span class="nav-number">15.3.</span> <span class="nav-text">XOR（异或）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的位运算操作"><span class="nav-number">15.4.</span> <span class="nav-text">常用的位运算操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计位1的个数-191"><span class="nav-number">15.5.</span> <span class="nav-text">统计位1的个数(191)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2的幂次方问题-231"><span class="nav-number">15.6.</span> <span class="nav-text">2的幂次方问题(231)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比特位计数问题-338"><span class="nav-number">15.7.</span> <span class="nav-text">比特位计数问题(338)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#N皇后II-52"><span class="nav-number">15.8.</span> <span class="nav-text">N皇后II(52)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态规划"><span class="nav-number">16.</span> <span class="nav-text">动态规划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#斐波那契"><span class="nav-number">16.1.</span> <span class="nav-text">斐波那契</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下楼梯"><span class="nav-number">16.2.</span> <span class="nav-text">下楼梯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DP-vs-回溯-vs-贪心"><span class="nav-number">16.3.</span> <span class="nav-text">DP vs 回溯 vs 贪心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爬楼梯-70"><span class="nav-number">16.4.</span> <span class="nav-text">爬楼梯(70)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三角形最小路径和-120"><span class="nav-number">16.5.</span> <span class="nav-text">三角形最小路径和(120)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#乘积最大子序列-152"><span class="nav-number">16.6.</span> <span class="nav-text">乘积最大子序列(152)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#穷举，递归"><span class="nav-number">16.6.1.</span> <span class="nav-text">穷举，递归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dp"><span class="nav-number">16.6.2.</span> <span class="nav-text">dp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#股票买卖系列"><span class="nav-number">16.7.</span> <span class="nav-text">股票买卖系列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#买卖一次-121"><span class="nav-number">16.7.1.</span> <span class="nav-text">买卖一次(121)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#买卖无数次-122"><span class="nav-number">16.7.2.</span> <span class="nav-text">买卖无数次(122)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#买卖2次-123"><span class="nav-number">16.7.3.</span> <span class="nav-text">买卖2次(123)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#买卖k次-188"><span class="nav-number">16.7.4.</span> <span class="nav-text">买卖k次(188)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可以持有多于一股"><span class="nav-number">16.7.5.</span> <span class="nav-text">可以持有多于一股</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加入cool-down-309"><span class="nav-number">16.7.6.</span> <span class="nav-text">加入cool down(309)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加入交易手续费-714"><span class="nav-number">16.7.7.</span> <span class="nav-text">加入交易手续费(714)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最长上升子序列-300"><span class="nav-number">16.8.</span> <span class="nav-text">最长上升子序列(300)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#暴力-剪枝，2-n"><span class="nav-number">16.8.1.</span> <span class="nav-text">暴力+剪枝，2^n</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DP"><span class="nav-number">16.8.2.</span> <span class="nav-text">DP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二分查找-NlogN"><span class="nav-number">16.8.3.</span> <span class="nav-text">二分查找(NlogN )</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#零钱兑换-322"><span class="nav-number">16.9.</span> <span class="nav-text">零钱兑换(322)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DP-1"><span class="nav-number">16.9.1.</span> <span class="nav-text">DP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑距离-72"><span class="nav-number">16.10.</span> <span class="nav-text">编辑距离(72)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DP-2"><span class="nav-number">16.10.1.</span> <span class="nav-text">DP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并查集"><span class="nav-number">17.</span> <span class="nav-text">并查集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#岛屿的个数-200"><span class="nav-number">17.1.</span> <span class="nav-text">岛屿的个数(200)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#染色-floodfill"><span class="nav-number">17.1.1.</span> <span class="nav-text">染色(floodfill)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#并查集-1"><span class="nav-number">17.1.2.</span> <span class="nav-text">并查集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#朋友圈-547"><span class="nav-number">17.2.</span> <span class="nav-text">朋友圈(547)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LRU-Cache"><span class="nav-number">18.</span> <span class="nav-text">LRU Cache</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LRU-Cache-146"><span class="nav-number">18.1.</span> <span class="nav-text">LRU Cache(146)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bloom-Filter-布隆过滤器"><span class="nav-number">19.</span> <span class="nav-text">Bloom Filter(布隆过滤器)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">20.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#现实生活中的算法问题"><span class="nav-number">20.1.</span> <span class="nav-text">现实生活中的算法问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码模板"><span class="nav-number">20.2.</span> <span class="nav-text">代码模板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#递归"><span class="nav-number">20.2.1.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DFS-递归写法"><span class="nav-number">20.2.2.</span> <span class="nav-text">DFS-递归写法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BFS"><span class="nav-number">20.2.3.</span> <span class="nav-text">BFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二分查找-1"><span class="nav-number">20.2.4.</span> <span class="nav-text">二分查找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态规划-1"><span class="nav-number">20.2.5.</span> <span class="nav-text">动态规划</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#位运算操作"><span class="nav-number">20.2.6.</span> <span class="nav-text">位运算操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#答疑"><span class="nav-number">20.3.</span> <span class="nav-text">答疑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不同编程语言的语法"><span class="nav-number">20.3.1.</span> <span class="nav-text">不同编程语言的语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反转链表"><span class="nav-number">20.3.2.</span> <span class="nav-text">反转链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链表交换相邻元素"><span class="nav-number">20.3.3.</span> <span class="nav-text">链表交换相邻元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#练习和切题"><span class="nav-number">20.4.</span> <span class="nav-text">练习和切题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试答题四件套"><span class="nav-number">20.5.</span> <span class="nav-text">面试答题四件套</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回到起点"><span class="nav-number">20.6.</span> <span class="nav-text">回到起点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切题姿势"><span class="nav-number">20.7.</span> <span class="nav-text">切题姿势</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
