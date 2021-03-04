@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"coder67.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;cpu调度 背景上下文切换 切换CPU的当前任务，从一个进程&#x2F;线程转换到另一个进程&#x2F;线程； 但是切换之前要保护现场，保存当前进程&#x2F;线程在PCB&#x2F;TCP中的执行上下文(也就是CPU的状态)； 切换任务，当然要读取下一个进程&#x2F;线程的上下文。  CPU调度 从就绪队列中挑选一个进程&#x2F;线程作为CPU将要运行的下一个进程&#x2F;线程；">
+  <meta name="description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;cpu调度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="08-cpu调度">
 <meta property="og:url" content="https://coder67.cn/posts/ab92dba5.html">
 <meta property="og:site_name" content="coder67&#39;s blog">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;cpu调度 背景上下文切换 切换CPU的当前任务，从一个进程&#x2F;线程转换到另一个进程&#x2F;线程； 但是切换之前要保护现场，保存当前进程&#x2F;线程在PCB&#x2F;TCP中的执行上下文(也就是CPU的状态)； 切换任务，当然要读取下一个进程&#x2F;线程的上下文。  CPU调度 从就绪队列中挑选一个进程&#x2F;线程作为CPU将要运行的下一个进程&#x2F;线程；">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;cpu调度">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210301/20210301212749.jpg">
 <meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210301/20210301214208.jpg">
@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210301/20210301230826.jpg">
 <meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210301/20210301231648.jpg">
 <meta property="article:published_time" content="2021-03-04T14:00:48.000Z">
-<meta property="article:modified_time" content="2021-03-04T14:34:54.734Z">
+<meta property="article:modified_time" content="2021-03-04T14:38:16.520Z">
 <meta property="article:author" content="Lu Qi">
 <meta property="article:tag" content="清华操作系统课程笔记">
 <meta name="twitter:card" content="summary">
@@ -210,7 +210,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-03-04 22:00:48 / 修改时间：22:34:54" itemprop="dateCreated datePublished" datetime="2021-03-04T22:00:48+08:00">2021-03-04</time>
+              <time title="创建时间：2021-03-04 22:00:48 / 修改时间：22:38:16" itemprop="dateCreated datePublished" datetime="2021-03-04T22:00:48+08:00">2021-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,6 +262,8 @@
 
       
         <p>&emsp;&emsp;<a href="https://www.bilibili.com/video/BV1uW411f72n" target="_blank" rel="noopener">清华大学计算机操作系统课程笔记</a><br>&emsp;&emsp;<strong>cpu调度</strong></p>
+ <a id="more"></a>
+
 <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h3><ul>
 <li>切换CPU的当前任务，从一个进程/线程转换到另一个进程/线程；</li>
 <li>但是切换之前要保护现场，保存当前进程/线程在PCB/TCP中的执行上下文(也就是CPU的状态)；</li>

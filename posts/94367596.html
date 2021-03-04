@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"coder67.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;页面置换算法 功能与目标功能：当缺页中断发生，需要调入新的页面而内存已满时，选择内存当中哪个物理页面被置换。目标：尽可能减少页面的换入换出次数(即缺页中断的次数，由于硬盘读写速度比内存读写速度慢一到两个数量级)。把未来不再使用的或短期内较少使用的页面换出，通常只能在局部性原理的指导下依据过去的统计数据来进行预测。页面锁定">
+  <meta name="description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;页面置换算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="06-页面置换算法">
 <meta property="og:url" content="https://coder67.cn/posts/94367596.html">
 <meta property="og:site_name" content="coder67&#39;s blog">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;页面置换算法 功能与目标功能：当缺页中断发生，需要调入新的页面而内存已满时，选择内存当中哪个物理页面被置换。目标：尽可能减少页面的换入换出次数(即缺页中断的次数，由于硬盘读写速度比内存读写速度慢一到两个数量级)。把未来不再使用的或短期内较少使用的页面换出，通常只能在局部性原理的指导下依据过去的统计数据来进行预测。页面锁定">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;页面置换算法">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226203259.jpg">
 <meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226204358.jpg">
@@ -52,7 +52,7 @@
 <meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210228/20210228202708.jpg">
 <meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210228/20210228203218.jpg">
 <meta property="article:published_time" content="2021-03-04T13:58:29.000Z">
-<meta property="article:modified_time" content="2021-03-04T14:34:54.728Z">
+<meta property="article:modified_time" content="2021-03-04T14:38:00.179Z">
 <meta property="article:author" content="Lu Qi">
 <meta property="article:tag" content="清华操作系统课程笔记">
 <meta name="twitter:card" content="summary">
@@ -221,7 +221,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-03-04 21:58:29 / 修改时间：22:34:54" itemprop="dateCreated datePublished" datetime="2021-03-04T21:58:29+08:00">2021-03-04</time>
+              <time title="创建时间：2021-03-04 21:58:29 / 修改时间：22:38:00" itemprop="dateCreated datePublished" datetime="2021-03-04T21:58:29+08:00">2021-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,6 +273,8 @@
 
       
         <p>&emsp;&emsp;<a href="https://www.bilibili.com/video/BV1uW411f72n" target="_blank" rel="noopener">清华大学计算机操作系统课程笔记</a><br>&emsp;&emsp;<strong>页面置换算法</strong></p>
+ <a id="more"></a>
+
 <h2 id="功能与目标"><a href="#功能与目标" class="headerlink" title="功能与目标"></a>功能与目标</h2><p><strong>功能</strong>：当缺页中断发生，需要调入新的页面而内存已满时，选择内存当中哪个物理页面被置换。<br><strong>目标</strong>：<strong>尽可能减少页面的换入换出次数</strong>(即缺页中断的次数，由于硬盘读写速度比内存读写速度慢一到两个数量级)。把未来不再使用的或短期内较少使用的页面换出，通常只能在局部性原理的指导下依据过去的统计数据来进行预测。<br><strong>页面锁定(frame locking)</strong>：用于描述必须常驻内存的操作系统的关键部分或时间关键(time-critical)的应用进程。实现方法是，在页表中添加锁定标志位(lock bit)。</p>
 <h2 id="实验设置与评价方法"><a href="#实验设置与评价方法" class="headerlink" title="实验设置与评价方法"></a>实验设置与评价方法</h2><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210226/20210226203259.jpg" alt="20210226203259" style="zoom:80%;" />
 
