@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"coder67.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;同步 背景知识调度独立的线程：  不和其他线程共享资源或状态 确定性-&gt;输入状态决定结果 可重现-&gt;能够重现起始条件 调度顺序不重要  合作线程：  在多线程中共享状态 不确定性 不可重现（不可重复性）  这些不确定性和不可重复以意味着bug可能是间歇性发生的，也就是合作是有风险的。 为什么要合作 共享资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="09-同步">
+<meta property="og:url" content="https://coder67.cn/posts/dcaa5905.html">
+<meta property="og:site_name" content="coder67&#39;s blog">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;同步 背景知识调度独立的线程：  不和其他线程共享资源或状态 确定性-&gt;输入状态决定结果 可重现-&gt;能够重现起始条件 调度顺序不重要  合作线程：  在多线程中共享状态 不确定性 不可重现（不可重复性）  这些不确定性和不可重复以意味着bug可能是间歇性发生的，也就是合作是有风险的。 为什么要合作 共享资源">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303145601.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303145654.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303150636.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303155928.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303160015.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303160206.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303160425.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303160651.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303161040.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303162305.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303162524.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303164616.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303165324.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303170034.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303170608.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303170735.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303171343.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303171555.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303173439.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303173816.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303174641.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303175002.jpg">
+<meta property="article:published_time" content="2021-03-04T14:01:13.000Z">
+<meta property="article:modified_time" content="2021-03-04T14:12:51.602Z">
+<meta property="article:author" content="Lu Qi">
+<meta property="article:tag" content="清华操作系统课程笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303145601.jpg">
+
+<link rel="canonical" href="https://coder67.cn/posts/dcaa5905.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>09-同步 | coder67's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="coder67's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder67's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">与君初相识，犹如故人归</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">23</span></a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/luqicoder" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/dcaa5905.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lu Qi">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder67's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          09-同步
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-04 22:01:13 / 修改时间：22:12:51" itemprop="dateCreated datePublished" datetime="2021-03-04T22:01:13+08:00">2021-03-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/posts/dcaa5905.html#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" id="/posts/dcaa5905.html" data-xid="/posts/dcaa5905.html" itemprop="commentCount"></span>
+    </a>
+ </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&emsp;&emsp;<a href="https://www.bilibili.com/video/BV1uW411f72n" target="_blank" rel="noopener">清华大学计算机操作系统课程笔记</a><br>&emsp;&emsp;<strong>同步</strong></p>
+<h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><h3 id="调度"><a href="#调度" class="headerlink" title="调度"></a>调度</h3><p>独立的线程：</p>
+<ul>
+<li>不和其他线程共享资源或状态</li>
+<li>确定性-&gt;输入状态决定结果</li>
+<li>可重现-&gt;能够重现起始条件</li>
+<li>调度顺序不重要</li>
+</ul>
+<p>合作线程：</p>
+<ul>
+<li>在多线程中共享状态</li>
+<li>不确定性</li>
+<li>不可重现（不可重复性）</li>
+</ul>
+<p><strong>这些不确定性和不可重复以意味着bug可能是间歇性发生的，也就是合作是有风险的。</strong></p>
+<h3 id="为什么要合作"><a href="#为什么要合作" class="headerlink" title="为什么要合作"></a>为什么要合作</h3><ul>
+<li>共享资源<ul>
+<li>资源是需要共享的，因为进程可能要访问同一个文件。</li>
+</ul>
+</li>
+<li>加速<ul>
+<li>通过并行和并发，可以提高系统的效率，实现更有效的资源的利用。相当于把一个大的任务，拆分成多个小的任务，每个任务通过并行的执行提高系统的性能。</li>
+</ul>
+</li>
+<li>模块化<ul>
+<li>在设计时将一个大的工作，变成一个小的工作，使之具有模块化，使系统便于扩展。</li>
+</ul>
+</li>
+</ul>
+<h3 id="出现的问题"><a href="#出现的问题" class="headerlink" title="出现的问题"></a>出现的问题</h3><p>例子：</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303145601.jpg" alt="20210303145601" style="zoom:100%;" />
+
+<p>以上四条汇编指令的意思是：<br>1）把next_pid赋值给寄存器1（Reg1）<br>2）再把这个寄存器1存到了new_pid这个内存单元的去。此时new_pid就具有了next_pid这个值。<br>3）寄存器1加一操作。<br>4）完成next_pid的值增加了一个1的操作。<br>总的实现过程：<br>先把new_pid = next_pid，然后next_pid再加1.</p>
+<p>但是，如果这时有两个进程，就会出现意想不到的情况：</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303145654.jpg" alt="20210303145654" style="zoom:100%;" />
+
+<p>问题产生的原因：<br>在第二次进程的上下文切换时候，进程1的寄存器恢复之后依然100的值，是的next的值无法更新称为102。最终产生了切换使得最终的结果不是想要的结果。这是一种典型的异常现象。</p>
+<p>因此需要：</p>
+<ul>
+<li>无论多个线程的指令序列怎样交替执行，程序都必须正常工作<ul>
+<li>多线程程序具有不确定性和不可重现的特点</li>
+<li>不经过专门设计，<strong>调试难度很高</strong></li>
+</ul>
+</li>
+<li>不确定性要求并行程序的正确性<ul>
+<li>先思考清楚问题，把程序的行为设计清楚</li>
+<li>切忌急于着手编写代码，碰到问题再调试</li>
+</ul>
+</li>
+</ul>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="竞态条件Race-condition"><a href="#竞态条件Race-condition" class="headerlink" title="竞态条件Race condition"></a>竞态条件Race condition</h3><p>系统缺陷：结果依赖于并发执行或事件的顺序：<strong>不确定性，不可重现</strong><br>避免竞态：让指令不被打断</p>
+<h3 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h3><ul>
+<li>原子操作是指一次不存在任何中断或者失败的执行<ul>
+<li>该执行成功结束</li>
+<li>或者根本没有执行</li>
+<li>并且不应该发现任何部分执行的状态</li>
+</ul>
+</li>
+<li>实际上操作往往不是原子的<ul>
+<li>有些看上去是原子操作，实际上不是</li>
+<li>连x++这样的简单语句，实际上是由3条指今构成的</li>
+<li>有时候甚至连单条机器指今都不是原子的</li>
+<li>pipeline, super-scalar, out-of-order, page fault</li>
+</ul>
+</li>
+</ul>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303150636.jpg" alt="20210303150636" style="zoom:100%;" />
+
+<h3 id="Critical-section（临界区）"><a href="#Critical-section（临界区）" class="headerlink" title="Critical section（临界区）"></a>Critical section（临界区）</h3><p>临界区是指进程中的一段需要访问共享资源井且当另一个进程处于相应代码区域时便不会被执行的代码区域</p>
+<h3 id="Mutual-exclusion（互斥）"><a href="#Mutual-exclusion（互斥）" class="headerlink" title="Mutual exclusion（互斥）"></a>Mutual exclusion（互斥）</h3><p>当一个进程处于临界区并访问共享资源时，没有其他进程会处于临界区井且访问任何相同的共享资源</p>
+<h3 id="Dead-lock-死锁"><a href="#Dead-lock-死锁" class="headerlink" title="Dead lock(死锁)"></a>Dead lock(死锁)</h3><p>两个或以上的进程，在相互等待完成特定任务，而最终没法将自身任务进行下去</p>
+<h3 id="Starvation（饥饿）"><a href="#Starvation（饥饿）" class="headerlink" title="Starvation（饥饿）"></a>Starvation（饥饿）</h3><p>一个可执行的进程，被调度器持续忽略，以至于虽然处于可执行状态却不被执行</p>
+<h3 id="买面包问题"><a href="#买面包问题" class="headerlink" title="买面包问题"></a>买面包问题</h3><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303155928.jpg" alt="20210303155928" style="zoom:100%;" />
+
+<ul>
+<li>什么是“面包太多”问题的正确性质？<ul>
+<li>最多有一个人去买面包</li>
+<li>如果需要，有人会去买面包</li>
+</ul>
+</li>
+<li>例如，在冰箱上设置一个锁和钥匙（lock&amp;key）<ul>
+<li>去买面包之前锁住冰箱井且走钥匙</li>
+<li>修复了“太多”的可题：要是有人想要果汁怎么办？</li>
+<li>可以改变“锁(lock)”的含义</li>
+<li>”锁(lock)”包含“等待( waiting)“</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>lock（锁）：在门、抽屉等物体上加上保护性装置，使得外人无法访物体内的东西，只能等待解锁后才能访问。</li>
+<li>lock（解锁）：打开保护性装置，使得可以访问之前被锁保护的物体类的东西</li>
+<li>Deadlock（死锁）：A拿到锁1,B到锁2,A想继等到锁2后再继续执行，B想继续拿到锁1后再继续执行。导致A和B谁也无法继续执行</li>
+</ol>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303160015.jpg" alt="20210303160015" style="zoom:100%;" />
+
+<p>还是会出现问题，可能两个人都去买面包</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303160206.jpg" alt="20210303160206" style="zoom:100%;" />
+
+<p>如果把留便签放到第一位，可能导致谁都不去面包。</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303160425.jpg" alt="20210303160425" style="zoom:100%;" />
+
+<p>为便签增加标签？</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303160651.jpg" alt="20210303160651" style="zoom:100%;" />
+
+<ul>
+<li>可能导致没有线程去买面包<ul>
+<li>错误时间的上下文切换可能会导致每个线程都认为另外一个线程回去买面包</li>
+</ul>
+</li>
+<li>最难处理的：<ul>
+<li>极其不可能发生的事情也会发生在糟糕的时间</li>
+<li>就像UNIX中的一些事情</li>
+</ul>
+</li>
+<li>这种锁定状态叫做“<strong>饥饿( starvation)</strong>”</li>
+</ul>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303161040.jpg" alt="20210303161040" style="zoom:100%;" />
+
+<ul>
+<li>它有效，但是真的不够好</li>
+<li>太复杂了-即使对这个简单的例子而言<ul>
+<li>难以说服你自己它真的有效</li>
+</ul>
+</li>
+<li>A和B的代码不同<ul>
+<li>每个线程的代码也会略有不同</li>
+<li>如果线程过多怎么办？</li>
+</ul>
+</li>
+<li>当A在等待的时候，其实是在消耗CPU的时间<ul>
+<li>这种情况叫做“忙等待(busy- waiting)”</li>
+</ul>
+</li>
+<li><strong>有更好的方法吗？</strong></li>
+</ul>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303162305.jpg" alt="20210303162305" style="zoom:100%;" />
+
+<p>确保只有一个进程在临近区，而其他进程在外面等待。</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303162524.jpg" alt="20210303162524" style="zoom:100%;" />
+
+<h2 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h2><p>临界区执行所需要的拥有的一些属性：</p>
+<ul>
+<li><strong>互斥</strong>：同一时间临界区中最多存在一个线程</li>
+<li><strong>Progress</strong>:如果一个线程想要进入临界区，那么它最终会成功</li>
+<li><strong>有限等待</strong>：如果一个线程i处于入口区，那么在i的请求被接受之前其他线程进入临界区的时间是有限制的</li>
+<li>无忙等待（可选）：如果一个进程在等待进入临界区，那么在它可以之前会被挂起</li>
+</ul>
+<h2 id="保护临界区的方法"><a href="#保护临界区的方法" class="headerlink" title="保护临界区的方法"></a>保护临界区的方法</h2><h3 id="禁用硬件中断"><a href="#禁用硬件中断" class="headerlink" title="禁用硬件中断"></a>禁用硬件中断</h3><p>进程的切换调度，需要时钟中断。</p>
+<ul>
+<li>没有中断，也就是没有了上下文切换，因此没有并发。<ul>
+<li>硬件将中断处理延迟到中断被启用之后</li>
+<li>大多数现代计算机体系结构都提供指令来完成</li>
+</ul>
+</li>
+<li>进入临界区<ul>
+<li>禁用中断</li>
+</ul>
+</li>
+<li>离开临界区<ul>
+<li>开启中断</li>
+</ul>
+</li>
+</ul>
+<p>中断：响应外设产生的事件，及时和外设交互（网络包，时钟信号，磁盘块读写）。若没有中断，这些事件不能得到及时响应，会严重影响系统效率。（针对小的临界区可能有效）</p>
+<p>缺点：</p>
+<ul>
+<li><p>一旦中断被禁用，线程就无法被停止</p>
+</li>
+<li><p>整个系统都会为你停下来</p>
+</li>
+<li><p>可能导致其他线程处于饥饿状态</p>
+</li>
+<li><p>要是临界区可以任意长</p>
+<ul>
+<li>无法限制响应中断所需的时间（可能存在硬件影响）</li>
+</ul>
+</li>
+</ul>
+<p>需要注意：<br>执行这种屏蔽中断的指令，只是把自身的响应中断的能力屏蔽了，并不意味着也将其他cpu的响应中断能力屏蔽，所以其实其他的cpu还是可以继续产生中断，所以在多cpu的情况下是无法解决互斥问题的。</p>
+<h3 id="基于软件的解决方案"><a href="#基于软件的解决方案" class="headerlink" title="基于软件的解决方案"></a>基于软件的解决方案</h3><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303164616.jpg" alt="20210303164616" style="zoom:100%;" />
+
+<h4 id="共享变量-1"><a href="#共享变量-1" class="headerlink" title="共享变量-1"></a>共享变量-1</h4><p>某一个进程，它想进入临界区，其有一个顺序（turn，次序），根据这个次序决定谁会进入这个临界区。</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303165324.jpg" alt="20210303165324" style="zoom:100%;" />
+
+<p>假设这个线程的次序是0，那么当turn=0时，才去继续下面的执行临界区代码，否者在while循环中一直打转。条件满足时，改变使得turn=1。<br>而进程1的代码也是类似的，只是while循环中的判断条件是不等于0，下面的turn=0.</p>
+<p>但是这个程序存在弊端：<br>必须进程1执行一次临界区，进程0执行一次临界区，然后两个交替执行，才能保证两继续的执行。一旦其中的一个进程不愿意再做这个事情，另一个进程将不能再进入临界区。按照之前的<strong>Progress</strong>属性，其他进程想进去就应该能够进去，但是在这种模式下，就无法完成这个前进的属性。</p>
+<h4 id="共享变量-2"><a href="#共享变量-2" class="headerlink" title="共享变量-2"></a>共享变量-2</h4><p>前面表示了一个turn是不够表示，所以接下来使用一个小数组flag[2]来表示这个进程是否想进入临界区。</p>
+<p>flag[0] = 1 //表示进程0想进入临界区执行<br>flag[1] = 1 //表示进程1想进入临界区执行</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303170034.jpg" alt="20210303170034" style="zoom:100%;" />
+
+<p>但是这个代码存在问题的，不能满足互斥属性（同一时间临界区中最多存在一个线程）。<br>因为在初始的时候，两个进程都不会想进入临界区，所以两个flag都会赋值为0，表面没有这个需求。这样就是的两个进程都会跳出这个循环，然后都会将直接本身赋值为1，进入临界区，也就出现了多买面包的想象。</p>
+<h4 id="共享变量-3"><a href="#共享变量-3" class="headerlink" title="共享变量-3"></a>共享变量-3</h4><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303170608.jpg" alt="20210303170608" style="zoom:100%;" />
+
+<p>满足了互斥，但是若两个线程都赋值了1，出现上下文切换的时候，都无法跳出这个循环，也就是出现是死锁的情况。</p>
+<h4 id="互斥的正确解法（Dekker算法）"><a href="#互斥的正确解法（Dekker算法）" class="headerlink" title="互斥的正确解法（Dekker算法）"></a>互斥的正确解法（Dekker算法）</h4><p>将以上的两种思考都综合起来使用。三个变量共同的作用。</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303170735.jpg" alt="20210303170735" style="zoom:100%;" />
+
+<p>该算法可以满足互斥，前进和有限等待三个属性。<br>反证法来证明：<br>假定，现在两个进程都进入了临界区，都在执行临界区代码，但是turn只是一个值的，所以总会有一个线程会跳出循环的。</p>
+<p>另外一种算法：所需的变量空间相同，但是更加的复杂</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303171343.jpg" alt="20210303171343" style="zoom:100%;" />
+
+<h4 id="n进程解决方法1-（E-amp-M算法）"><a href="#n进程解决方法1-（E-amp-M算法）" class="headerlink" title="n进程解决方法1 （E&amp;M算法）"></a>n进程解决方法1 （E&amp;M算法）</h4><p>除了了针对两个进程之外，还可以拓展到n个进程如何保证互斥。</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303171555.jpg" alt="20210303171555" style="zoom:100%;" />
+
+<p>大致的思路：<br>对于进程i而言，对于其前面的进程而言，如果有进程想进入临界区，或者已经进入了临界区，那么i进程就必须等待。而对于i进程后面的进程，必须要等待i进程执行之后在进入临界区。这样就可以通过一个循环的方式完成n个进程有序的进入临界区。</p>
+<h4 id="n进程解决方法2（Bakery算法）"><a href="#n进程解决方法2（Bakery算法）" class="headerlink" title="n进程解决方法2（Bakery算法）"></a>n进程解决方法2（Bakery算法）</h4><p>N个进程的临界区</p>
+<ul>
+<li>进入临界区之前，进程接收一个数字</li>
+<li>得到的数字最小的进入临界区</li>
+<li>如果进程Pi和Pj收到相同的数字，那么如果i&lt;j,Pi先进入临界区，否则Pj先进入临界区</li>
+<li>编号方案总是按照枚举的增加顺序生成数字</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>Dekker算法(1965):第一个针对双线程例子的正确解决方案</li>
+<li>Bakery算法( Lamport 1979):针对n线程的临界区问题解决方</li>
+<li>复杂<ul>
+<li>需两个进程间的共享数据项</li>
+</ul>
+</li>
+<li>需要忙等待<ul>
+<li>浪费CPUN间</li>
+</ul>
+</li>
+<li>没有硬件保证的情况下无真正的软件解决方案<ul>
+<li>Peterson算法需要原子的LOAD和 STORE指今</li>
+</ul>
+</li>
+</ul>
+<h3 id="更高级的抽象"><a href="#更高级的抽象" class="headerlink" title="更高级的抽象"></a>更高级的抽象</h3><p>软件的处理比较复杂有没有更加简单的实现方法？</p>
+<ul>
+<li>硬件提供了一些原语<ul>
+<li>像中断禁用，原子操作指令等</li>
+<li>大多数现代体系结构都这样</li>
+</ul>
+</li>
+<li>操作系统提供更高级的编程抽象来简化并行编程<ul>
+<li>例如：锁，信号量</li>
+<li>从硬件原语中构建</li>
+</ul>
+</li>
+</ul>
+<p>基于操作系统的支持让互斥访问变得更简单。</p>
+<ul>
+<li>锁是一个抽象的数据结构<ul>
+<li>一个二进制状态(锁定/解锁)，两种方法</li>
+<li>Lock: Acquire()-锁被释放前一直等待，然后得到锁</li>
+<li>Lock:: Release()-释放锁，唤醒任何等待的进程</li>
+</ul>
+</li>
+<li>使用锁来编写临界区<br>前面的例子变得简单起来<br>  lock_next pid-&gt;Acquire();<br>  new_pid=next_pid++;<br>  lock_next_pid-&gt;Release();</li>
+</ul>
+<ul>
+<li>大多数现代体系结构都提供特殊的原子操作指今<ul>
+<li>通过特殊的内存访问电路</li>
+<li>针对单处理器和多处理器</li>
+</ul>
+</li>
+<li>Test-and-Set测试和置位（一条机器指令，但是完成了读写操作两条指令的功能）<ul>
+<li>从内存中读取值</li>
+<li>测试该值是否为1（然后返回真或假）</li>
+<li>内存值设置为1</li>
+</ul>
+</li>
+<li>交换<ul>
+<li>交换内存中的两个值</li>
+</ul>
+</li>
+</ul>
+<p>封装成机器指令<br><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303173439.jpg" alt="20210303173439" style="zoom:100%;" /></p>
+<p>只要计算机系统提供了这两条的其中一条指令就可以很容易的完成互斥的问题。</p>
+<h4 id="锁的方式"><a href="#锁的方式" class="headerlink" title="锁的方式"></a>锁的方式</h4><p>实现：使用忙等待的锁</p>
+<ul>
+<li>就像上面使用test-and-set实现的锁一样</li>
+<li>线程在等待的时候消耗CPU周期<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303173816.jpg" alt="20210303173816" style="zoom:100%;" />
+
+</li>
+</ul>
+<p><strong>进一步的改进，不要忙等</strong>。<br>解决方法：如果进程正在等待，且进入不到临界区时，让进程阻塞，睡眠。（当前进程挂到阻塞队列，cpu让给其他进程使用）。当另一个进程退出临界区时，加入唤醒操作。</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303174641.jpg" alt="20210303174641" style="zoom:100%;" />
+
+<p>忙等待和无忙等待的区别：</p>
+<ul>
+<li>忙等：不需要上下文切换，但是利用率低，适用与临界区执行时间短的情况。</li>
+<li>不忙等：需要上下文切换，上下文切换开销比较大大，适用于临界区很长，远远大于上下文切换所需要的开销。</li>
+</ul>
+<h4 id="交换的方式"><a href="#交换的方式" class="headerlink" title="交换的方式"></a>交换的方式</h4><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210303/20210303175002.jpg" alt="20210303175002" style="zoom:100%;" />
+
+<p>解析：</p>
+<ul>
+<li>lock初始值为0，表示没有进程要进入临界区</li>
+<li>当一个进程想要进入临界区的时候，key=1，而且lock的初始值是0，所以当执行到while循环的时候，由于执行了交换，交换执行的过程不会被打断进行上下文切换的操作，而后lock的变成了1，而key变成了0.所以会退出循环，执行临界区的代码。</li>
+<li>需要注意的是，当进入临界区的时候，load已经是1，当其他进程进入临界区执行的时候，load是1，而key也是1，交换之后还是1，一直会循环的等待，进入不了临界区。知道进入临界区的进程，退出临界区之后，完成一个将load变成0的操作。其他等待的进程才会继续执行exchange。</li>
+</ul>
+<p>采用这种原子操作的特点：</p>
+<ul>
+<li><p>优点</p>
+<ul>
+<li>简单并且容易证明适用于单处理器或者共享主存的多处理器中任意数量的进程</li>
+<li>可以很容易拓展n个进程，可以用于支持多临界区</li>
+<li>开销比较小</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>忙等待消耗处理器时间</li>
+<li>当进程离开临界区并且多个进程在等待的时候可能导致饥饿现象（某个进程一直抢不到）</li>
+<li>出现死锁的情况（例子：如果一个低优先级的进程拥有临界区并且一个高优先级进程也需求，那么高优先级进程会获得处理器并且等待临界区 — 需要用优先级反转的方式进行处理）</li>
+</ul>
+</li>
+</ul>
+<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>锁是更高级的编程抽象<ul>
+<li>互斥可以使用锁来实现</li>
+<li>通常需要一定等级的硬件支持</li>
+</ul>
+</li>
+<li>常用的三种实现方法<ul>
+<li>禁用中断（仅限于单处理器）</li>
+<li>软件方法（复杂）</li>
+<li>原子操作指令（但处理器或多处理器均可）—更常用</li>
+</ul>
+</li>
+<li>可选的实现内容<ul>
+<li>有忙等待</li>
+<li>无忙等待</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B8%85%E5%8D%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="tag"># 清华操作系统课程笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/ab92dba5.html" rel="prev" title="08-cpu调度">
+      <i class="fa fa-chevron-left"></i> 08-cpu调度
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景知识"><span class="nav-number">1.</span> <span class="nav-text">背景知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#调度"><span class="nav-number">1.1.</span> <span class="nav-text">调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要合作"><span class="nav-number">1.2.</span> <span class="nav-text">为什么要合作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#出现的问题"><span class="nav-number">1.3.</span> <span class="nav-text">出现的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#竞态条件Race-condition"><span class="nav-number">2.1.</span> <span class="nav-text">竞态条件Race condition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原子操作"><span class="nav-number">2.2.</span> <span class="nav-text">原子操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Critical-section（临界区）"><span class="nav-number">2.3.</span> <span class="nav-text">Critical section（临界区）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mutual-exclusion（互斥）"><span class="nav-number">2.4.</span> <span class="nav-text">Mutual exclusion（互斥）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dead-lock-死锁"><span class="nav-number">2.5.</span> <span class="nav-text">Dead lock(死锁)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Starvation（饥饿）"><span class="nav-number">2.6.</span> <span class="nav-text">Starvation（饥饿）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#买面包问题"><span class="nav-number">2.7.</span> <span class="nav-text">买面包问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#临界区"><span class="nav-number">3.</span> <span class="nav-text">临界区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保护临界区的方法"><span class="nav-number">4.</span> <span class="nav-text">保护临界区的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#禁用硬件中断"><span class="nav-number">4.1.</span> <span class="nav-text">禁用硬件中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于软件的解决方案"><span class="nav-number">4.2.</span> <span class="nav-text">基于软件的解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#共享变量-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">共享变量-1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#共享变量-2"><span class="nav-number">4.2.2.</span> <span class="nav-text">共享变量-2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#共享变量-3"><span class="nav-number">4.2.3.</span> <span class="nav-text">共享变量-3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#互斥的正确解法（Dekker算法）"><span class="nav-number">4.2.4.</span> <span class="nav-text">互斥的正确解法（Dekker算法）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#n进程解决方法1-（E-amp-M算法）"><span class="nav-number">4.2.5.</span> <span class="nav-text">n进程解决方法1 （E&amp;M算法）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#n进程解决方法2（Bakery算法）"><span class="nav-number">4.2.6.</span> <span class="nav-text">n进程解决方法2（Bakery算法）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">4.2.7.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更高级的抽象"><span class="nav-number">4.3.</span> <span class="nav-text">更高级的抽象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#锁的方式"><span class="nav-number">4.3.1.</span> <span class="nav-text">锁的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#交换的方式"><span class="nav-number">4.3.2.</span> <span class="nav-text">交换的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结-1"><span class="nav-number">4.3.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lu Qi"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lu Qi</p>
+  <div class="site-description" itemprop="description">真正的大师永远都怀着一颗学徒的心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luqicoder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luqicoder" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:luqicoder@foxmail.com" title="E-Mail → mailto:luqicoder@foxmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备19002966号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lu Qi</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">116k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#waline-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/@waline/client/dist/Waline.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Waline({
+      el            : '#waline-comments',
+      serverURL     : 'https://vercel-kohl-seven.vercel.app',
+      placeholder   : "Just go go！！！",
+      path          : location.pathname,
+      avatar        : 'mm',
+      meta          : guest,
+      pageSize      : '10' || 10,
+      lang          : 'zh-cn' || 'zh-cn',
+      visitor       : false,
+      highlight     : false,
+      avatarForce   : false,
+      emojiCDN      : '',
+      emojiMaps     : "",
+      requiredFields: ""
+    });
+  }, window.Waline);
+});
+</script>
+</body>
+</html>
