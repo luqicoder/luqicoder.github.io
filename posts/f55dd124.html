@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"coder67.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;01.计算机操作系统概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机操作系统概述">
+<meta property="og:url" content="https://coder67.cn/posts/f55dd124.html">
+<meta property="og:site_name" content="coder67&#39;s blog">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;清华大学计算机操作系统课程笔记&amp;emsp;&amp;emsp;01.计算机操作系统概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224191731.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224202441.jpg">
+<meta property="article:published_time" content="2021-03-04T13:34:51.000Z">
+<meta property="article:modified_time" content="2021-03-04T14:05:56.350Z">
+<meta property="article:author" content="Lu Qi">
+<meta property="article:tag" content="清华操作系统课程笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224191731.jpg">
+
+<link rel="canonical" href="https://coder67.cn/posts/f55dd124.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>计算机操作系统概述 | coder67's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="coder67's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder67's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">与君初相识，犹如故人归</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">15</span></a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/luqicoder" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/f55dd124.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lu Qi">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder67's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算机操作系统概述
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-04 21:34:51 / 修改时间：22:05:56" itemprop="dateCreated datePublished" datetime="2021-03-04T21:34:51+08:00">2021-03-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/posts/f55dd124.html#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" id="/posts/f55dd124.html" data-xid="/posts/f55dd124.html" itemprop="commentCount"></span>
+    </a>
+ </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&emsp;&emsp;<a href="https://www.bilibili.com/video/BV1uW411f72n" target="_blank" rel="noopener">清华大学计算机操作系统课程笔记</a><br>&emsp;&emsp;01.计算机操作系统概述</p>
+<a id="more"></a>
+
+<h2 id="操作系统定义"><a href="#操作系统定义" class="headerlink" title="操作系统定义"></a>操作系统定义</h2><h3 id="没有公认的精确定义"><a href="#没有公认的精确定义" class="headerlink" title="没有公认的精确定义"></a>没有公认的精确定义</h3><p>操作系统（Operating System， OS）是指控制和管理整个计算机系统的硬件和软件资源，并合理地组织调度计算机的工作和资源的分配；以提供给用户和其他软件方便的接口和环境；它是计算机系统中最基本的系统软件。</p>
+<h3 id="操作系统是一个控制程序"><a href="#操作系统是一个控制程序" class="headerlink" title="操作系统是一个控制程序"></a>操作系统是一个控制程序</h3><ul>
+<li>管理应用程序</li>
+<li>为应用程序提供服务(io服务，网卡，声卡服务)</li>
+<li>杀死应用程序</li>
+<li>资源管理</li>
+<li>管理外设/分配资源</li>
+</ul>
+<h3 id="操作系统是一个资源管理器"><a href="#操作系统是一个资源管理器" class="headerlink" title="操作系统是一个资源管理器"></a>操作系统是一个资源管理器</h3><ul>
+<li>应用程序与硬件之间的中间层</li>
+<li>管理各种计算机软硬件资源</li>
+<li>提供访问计算机软硬件资源的高效手段</li>
+<li>解决资源访问冲突，确保资源公平使用</li>
+</ul>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224191731.jpg" alt="20210224191731" style="zoom:50%;" />
+
+<h4 id="操作系统作为系统资源的管理者需要具备哪些功能"><a href="#操作系统作为系统资源的管理者需要具备哪些功能" class="headerlink" title="操作系统作为系统资源的管理者需要具备哪些功能"></a>操作系统作为系统资源的管理者需要具备哪些功能</h4><p>文件管理，设备管理，内存管理，处理机制（进程管理）目标：安全，高效。</p>
+<h4 id="操作系统作为用户和计算机硬件之间的接口需要哪些功能"><a href="#操作系统作为用户和计算机硬件之间的接口需要哪些功能" class="headerlink" title="操作系统作为用户和计算机硬件之间的接口需要哪些功能"></a>操作系统作为用户和计算机硬件之间的接口需要哪些功能</h4><p><strong>用户接口</strong>：分为命令接口和程序接口。</p>
+<blockquote>
+<p><code>命令接口</code>：用户可以直接使用，它又分为联机命令接口和脱机命令接口；<br>什么是联机命令接口？<br>用户输入一个命令，系统执行一个命令，例如你打开dos窗口，输入time，然后会显示当前系统时间，并且还可以设置时间。那什么优势脱机命令接口？脱机命令接口其实就是用户输入一大堆命令，然后系统执行一堆处理，这个打个比方就是创建一个文件，文件里面是系统要执行的命令，然后把后缀名改成 .bat或者其它可执行文件，然后交给系统执行。</p>
+</blockquote>
+<blockquote>
+<p><code>程序接口</code>：用户通过程序间接调用：由程序接口组成；<br>例如程序员使用C语言或者C++函数接口操作系统的资源。</p>
+</blockquote>
+<p><strong>GUI图形用户界面</strong>：方便用户使用。<br>Linux，Windows界面属于外壳shell(与User交互)，而不是内核kernel，而kernel是研究重点，在shell之下。</p>
+<h4 id="操作系统作为最接近硬件层次需要哪些功能和目标"><a href="#操作系统作为最接近硬件层次需要哪些功能和目标" class="headerlink" title="操作系统作为最接近硬件层次需要哪些功能和目标"></a>操作系统作为最接近硬件层次需要哪些功能和目标</h4><p>需要提供的功能和目标：实现对硬件及其的扩展<br>没有任何软件支持的计算机成为裸机。裸机上安装操作系统可以提供资源管理功能和方便用户的服务功能，讲裸机改造成功能更强，使用更加方便的机器。<br>通常把覆盖了软件的机器成为虚拟机</p>
+<h2 id="操作系统内核特征"><a href="#操作系统内核特征" class="headerlink" title="操作系统内核特征"></a>操作系统内核特征</h2><h3 id="1-并发"><a href="#1-并发" class="headerlink" title="1. 并发"></a>1. 并发</h3><p>并发是指宏观上在一段时间内能同时运行多个程序，而并行则指同一时刻能运行多个指令。</p>
+<p>并行需要硬件支持，如多流水线、多核处理器或者分布式计算系统。</p>
+<p>操作系统通过引入进程和线程，使得程序能够并发运行。</p>
+<h3 id="2-共享"><a href="#2-共享" class="headerlink" title="2. 共享"></a>2. 共享</h3><p>共享是指系统中的资源可以被多个并发进程共同使用。</p>
+<p>有两种共享方式：互斥共享和同时共享。</p>
+<p>互斥共享的资源称为临界资源，例如打印机等，在同一时刻只允许一个进程访问，需要用同步机制来实现互斥访问。</p>
+<h3 id="3-虚拟"><a href="#3-虚拟" class="headerlink" title="3. 虚拟"></a>3. 虚拟</h3><p>虚拟技术把一个物理实体转换为多个逻辑实体。</p>
+<p>主要有两种虚拟技术：时（时间）分复用技术和空（空间）分复用技术。</p>
+<p>多个进程能在同一个处理器上并发执行使用了时分复用技术，让每个进程轮流占用处理器，每次只执行一小个时间片并快速切换。</p>
+<p>虚拟内存使用了空分复用技术，它将物理内存抽象为地址空间，每个进程都有各自的地址空间。地址空间的页被映射到物理内存，地址空间的页并不需要全部在物理内存中，当使用到一个没有在物理内存的页时，执行页面置换算法，将该页置换到内存中。</p>
+<h3 id="4-异步"><a href="#4-异步" class="headerlink" title="4. 异步"></a>4. 异步</h3><p>异步指进程不是一次性执行完毕，而是走走停停，以不可知的速度向前推进。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果失去了并发性，则一个时间段内系统中只需运行一道程序，那么就失去了实现虚拟性的意义，同样共享是建立在并发的基础上的，如果没有并发，共享是无法实现的。</span><br></pre></td></tr></table></figure>
+
+<h2 id="操作系统的发展与分类"><a href="#操作系统的发展与分类" class="headerlink" title="操作系统的发展与分类"></a>操作系统的发展与分类</h2><ul>
+<li><strong>手工处理阶段</strong> ：主要缺点：用户独占全机、人机速度矛盾导致资源利用率极低；人机速度矛盾指的是：人通过打孔机在纸带上打孔，譬如：打孔的是1，没打孔的是0，然后将这条纸袋上的数据交给计算机处理得到结果，计算机处理的速度很快，处理后还是以纸袋的形式打出来，最后人们再践行解析，这个过程计算机处理的速度很快但是人们的输入与输出速度太慢了，在同一时刻，用户是独占整个机器来得到结果。</li>
+<li><strong>批处理阶段</strong>：分为单道批处理和多道批处理<ul>
+<li><strong>单道批处理</strong>：引入了脱机技术/输入技术（用磁带完成），并监督程序负责控制作业的输入、输出；这个算是计算机操作系统的雏形，他的优点：缓解了一定程度的人机速度矛盾，资源利用率有所提升。主要缺点：内存中仅有一道程序运行，只有该程序运行结束后才能调入下一道程序。CPU有大量的时间是在闲置等待这个任务完成。资源利用率还是很低。</li>
+<li><strong>多道批处理</strong>：他允许每次往内存中输入多个程序，操作系统处理这些程序，这个时候的操作系统才算是正式诞生，并引入了中断技术，由操作系统负责管理这些程序的运行，各个程序并发执行。<strong>主要优点</strong>：多道程序并发执行，共享计算机资源，资源利用率大幅度提升，系统的吞吐量变大，CPU开始忙碌起来。<strong>主要缺点</strong>：用户响应时间变长。用户与计算机之间没有交互，如果想知道这些程序计算的结果对不对只能等待计算机一次性处理完才知道，用户并不能控制自己的程序执行。</li>
+</ul>
+</li>
+<li><strong>分时操作系统</strong>：计算机以时间片为单位轮流为各个用户/作业服务，各个用户可通过终端与计算机进行交互。主要优点：用户请求可以被即时响应，解决了人机交互问题，允许多个用户同时使用一个计算机，并且用户对计算机的操作相互独立，感受不到被人的存在。主要缺点：不太能优先处理一些紧急任务，操作系统对各个用户、作业之间都是公平的，循环地为每个用户/作业服务一个时间片，不区分任务的紧急性。</li>
+<li><strong>实时操作系统</strong>：能够优先响应一些紧急任务，某些紧急任务不许时间片排队。在实时操作系统的控制下，计算机系统接收到外部信号后及时进行处理，并且在严格时间内处理完事件，实时操作系统的主要特点就是及时性和可靠性。例如：自动驾驶技术，导弹控制系统必须严格规定时间内完成处理，这是如遇实时操作系统中的硬实时操作系统，哪还有软实时操作系统：能 接收偶尔违反时间规定的操作系统。</li>
+<li><strong>网络操作系统</strong>：随着计算机网络的发展而诞生能够把各个计算机有机的结合起来实现数据传送的功能，例如windows NT</li>
+<li><strong>个人计算机操作系统</strong>：Window MacOS，Linux等</li>
+<li><strong>分布式操作系统</strong>：主要特点是分布性和并行性。系统中的各台计算机地位相同，任何工作都可以分布在这些计算机上，有他们并行协同完成。</li>
+</ul>
+<h2 id="操作系统的结构"><a href="#操作系统的结构" class="headerlink" title="操作系统的结构"></a>操作系统的结构</h2><h3 id="1-简单的操作系统"><a href="#1-简单的操作系统" class="headerlink" title="(1)简单的操作系统"></a>(1)简单的操作系统</h3><p>MS-DOS 不分模块的单体内核 (内部通过函数调用访问,<strong>缺点</strong>，复杂，紧耦合，易受攻击)</p>
+<h3 id="2-微内核"><a href="#2-微内核" class="headerlink" title="(2)微内核"></a>(2)微内核</h3><p>尽可能把内核功能移植到用户空间，<strong>缺点</strong>性能低。<br>操作系统内核只放基本功能（中断处理，消息传递）<br>文件系统，内存管理，网络协议栈放在外围以服务(进程，程序)的形式存在，服务和服务之间通过内核的消息传递机制通信。</p>
+<h3 id="3-外核"><a href="#3-外核" class="headerlink" title="(3)外核"></a>(3)外核</h3><p>内核分为两块，一块负责和硬件打交道，另一部分和应用打交道。</p>
+<h3 id="4-虚拟机"><a href="#4-虚拟机" class="headerlink" title="(4)虚拟机"></a>(4)虚拟机</h3><p>VMs(虚拟机)-&gt;VMM(虚拟机监视器)-&gt;物理机硬件，多操作系统共享硬件资源。<br><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210224/20210224202441.jpg" alt="20210224202441" style="zoom:100%;" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B8%85%E5%8D%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="tag"># 清华操作系统课程笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/48533112.html" rel="prev" title="Leetcode刷题笔记.md">
+      <i class="fa fa-chevron-left"></i> Leetcode刷题笔记.md
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统定义"><span class="nav-number">1.</span> <span class="nav-text">操作系统定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#没有公认的精确定义"><span class="nav-number">1.1.</span> <span class="nav-text">没有公认的精确定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统是一个控制程序"><span class="nav-number">1.2.</span> <span class="nav-text">操作系统是一个控制程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统是一个资源管理器"><span class="nav-number">1.3.</span> <span class="nav-text">操作系统是一个资源管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#操作系统作为系统资源的管理者需要具备哪些功能"><span class="nav-number">1.3.1.</span> <span class="nav-text">操作系统作为系统资源的管理者需要具备哪些功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作系统作为用户和计算机硬件之间的接口需要哪些功能"><span class="nav-number">1.3.2.</span> <span class="nav-text">操作系统作为用户和计算机硬件之间的接口需要哪些功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作系统作为最接近硬件层次需要哪些功能和目标"><span class="nav-number">1.3.3.</span> <span class="nav-text">操作系统作为最接近硬件层次需要哪些功能和目标</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统内核特征"><span class="nav-number">2.</span> <span class="nav-text">操作系统内核特征</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-并发"><span class="nav-number">2.1.</span> <span class="nav-text">1. 并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-共享"><span class="nav-number">2.2.</span> <span class="nav-text">2. 共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-虚拟"><span class="nav-number">2.3.</span> <span class="nav-text">3. 虚拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-异步"><span class="nav-number">2.4.</span> <span class="nav-text">4. 异步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的发展与分类"><span class="nav-number">3.</span> <span class="nav-text">操作系统的发展与分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的结构"><span class="nav-number">4.</span> <span class="nav-text">操作系统的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-简单的操作系统"><span class="nav-number">4.1.</span> <span class="nav-text">(1)简单的操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-微内核"><span class="nav-number">4.2.</span> <span class="nav-text">(2)微内核</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-外核"><span class="nav-number">4.3.</span> <span class="nav-text">(3)外核</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-虚拟机"><span class="nav-number">4.4.</span> <span class="nav-text">(4)虚拟机</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lu Qi"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lu Qi</p>
+  <div class="site-description" itemprop="description">真正的大师永远都怀着一颗学徒的心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luqicoder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luqicoder" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:luqicoder@foxmail.com" title="E-Mail → mailto:luqicoder@foxmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备19002966号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lu Qi</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#waline-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/@waline/client/dist/Waline.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Waline({
+      el            : '#waline-comments',
+      serverURL     : 'https://vercel-kohl-seven.vercel.app',
+      placeholder   : "Just go go！！！",
+      path          : location.pathname,
+      avatar        : 'mm',
+      meta          : guest,
+      pageSize      : '10' || 10,
+      lang          : 'zh-cn' || 'zh-cn',
+      visitor       : false,
+      highlight     : false,
+      avatarForce   : false,
+      emojiCDN      : '',
+      emojiMaps     : "",
+      requiredFields: ""
+    });
+  }, window.Waline);
+});
+</script>
+</body>
+</html>
