@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"coder67.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="&amp;emsp;&amp;emsp;C++ Primer笔记第十一章：关联容器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第十一章 关联容器">
+<meta property="og:url" content="https://coder67.cn/posts/cfc183de.html">
+<meta property="og:site_name" content="coder67&#39;s blog">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;C++ Primer笔记第十一章：关联容器。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200622/20200622105938.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200624/20200624101934.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628171329.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628194956.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628201829.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628202224.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628203233.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628223820.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200623/20200623231549.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200623/20200623232529.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628165704.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628172639.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628195819.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628210408.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628215256.jpg">
+<meta property="og:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628224902.jpg">
+<meta property="article:published_time" content="2020-06-22T02:47:30.000Z">
+<meta property="article:modified_time" content="2020-10-28T14:50:46.331Z">
+<meta property="article:author" content="Lu Qi">
+<meta property="article:tag" content="C++Primer笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200622/20200622105938.jpg">
+
+<link rel="canonical" href="https://coder67.cn/posts/cfc183de.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>第十一章 关联容器 | coder67's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="coder67's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder67's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">与君初相识，犹如故人归</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/luqicoder" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/cfc183de.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lu Qi">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder67's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第十一章 关联容器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-22 10:47:30" itemprop="dateCreated datePublished" datetime="2020-06-22T10:47:30+08:00">2020-06-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-28 22:50:46" itemprop="dateModified" datetime="2020-10-28T22:50:46+08:00">2020-10-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&emsp;&emsp;C++ Primer笔记第十一章：关联容器。</p>
+<a id="more"></a>
+
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p><strong>顺序容器与关联容器差异</strong>：顺序容器中的元素是按它们在容器中的位置来顺序保存和访问的，关联容器中的元素是按关键字来保存和访问的。<br><strong>map</strong>：map中的元素为关键字-值；关键字起索引作用，值表示与索引相关联的数据。<br><strong>set</strong>：set中的元素只包含一个关键字，set是关键字的简单集合。<br>标准库类型提供8种关联容器。map和multimap定义在头文件map中;set和multiset定义在头文件set中:无序容器定义在头文件 unordered_map和 unordered_set中。<br>8种关联容器差别体现在：</p>
+<ul>
+<li>每个容器是一个set,或者是一个map;</li>
+<li>容器中要求不重复的关键字,或者允许重复关键字;(利用multi前缀区分)</li>
+<li>容器按顺序保存元素,或无序保存。(利用unordered_区分)</li>
+</ul>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200622/20200622105938.jpg" alt="20200622105938" style="zoom:50%;" />  
+
+<h3 id="使用关联容器"><a href="#使用关联容器" class="headerlink" title="使用关联容器"></a>使用关联容器</h3><p>map使用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//统计每个单词在输入中出现的次数</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">size_t</span>&gt; word_count;<span class="comment">// string到 size_t的空map</span></span><br><span class="line"><span class="built_in">string</span> <span class="keyword">word</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; <span class="keyword">word</span>)</span><br><span class="line">    ++word_count[<span class="keyword">word</span>];<span class="comment">//提取word的计数器并将其加1,如果word不在map中,下标运算符会创建一个新元素,其关键字为word,值为0。</span></span><br><span class="line"><span class="keyword">for</span>( <span class="keyword">const</span> <span class="keyword">auto</span> &amp; w: word_count)<span class="comment">//对map中的每个元素打印结果</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; w.first &lt;&lt; <span class="string">"occurs "</span>&lt;&lt; w.second&lt;&lt; ((w.second&gt;<span class="number">1</span>)? <span class="string">" times"</span>: <span class="string">" time"</span>)&lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<p>范围for语句遍历map时，得到一个<strong>pair</strong>类型(模板类型)对象，保存名为first和second的数据成员，分别代表关键字和对应的值。<br>set使用：set中不会保存元素值相同的元素。其find成员函数调用返回一个迭代器。如果给定关键字在set中,迭代器指向该关键字，否则find返回尾后迭代器。</p>
+<h3 id="关联容器概述"><a href="#关联容器概述" class="headerlink" title="关联容器概述"></a>关联容器概述</h3><h4 id="定义关联容器"><a href="#定义关联容器" class="headerlink" title="定义关联容器"></a>定义关联容器</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">size_t</span>&gt; word_count;<span class="comment">//空容器</span></span><br><span class="line"><span class="comment">//三个元素; authors将姓映射为名</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; authors =&#123;&#123;<span class="string">"Joyce"</span>,<span class="string">"James"</span>&#125;,&#123;<span class="string">"Auste"</span>,<span class="string">"Jane"</span>&#125;,&#123;<span class="string">"Dickens"</span>,<span class="string">"Charles"</span>&#125;&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="关键字类型要求"><a href="#关键字类型要求" class="headerlink" title="关键字类型要求"></a>关键字类型要求</h4><p>有序容器中的关键字必须定义元素比较的方法。默认标准库使用关键字类型的&lt;的运算符来比较两个关键字。<br><strong>严格弱序</strong>：利用自定义操作代替关键字上的&lt;运算符。自定义操作必须在关键字类型上提供严格弱序。其基本性质如下：</p>
+<ul>
+<li>两个关键字不能同时“小于等于”对方;如果k1“小于等于”k2,那么k2绝不能“小于等于”k1。</li>
+<li>如果k1“小于等于”k2,且k2“小于等于”k3,那么k1必须“小于等于”k3。</li>
+<li>如果存在两个关键字,任何一个都不“小于等于”另一个,那么我们称这两个关键字是“等价”的。如果κ1“等价于”k2,且k2“等价于”k3,那么k1必须“等价于”k3。</li>
+</ul>
+<p><strong>使用自定义操作的容器</strong>：使用自己定义的操作定义容器时，必须提供两个类型:关键字类型和比较操作类型(是一种函数指针类型)。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compareIsbn</span><span class="params">(<span class="keyword">const</span> Sales_data &amp;lhs, <span class="keyword">const</span> Sales_data &amp;rhs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> lhs.isbn() &lt; rhs. isbn();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//用 compariSon初始化 bookstore对象,表示向 bookstore添加元素时,通过调用 compariSon来为这些元素排序。</span></span><br><span class="line">multiset&lt;Sales_data, decltype(compareIsbn)*&gt; bookstore(compareIsbn);</span><br></pre></td></tr></table></figure>
+<h4 id="pair类型"><a href="#pair类型" class="headerlink" title="pair类型"></a>pair类型</h4><p>标准库pair类型定义在头文件utility中，是一个用于生成特定类型的模板。<br><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200624/20200624101934.jpg" alt="20200624101934" style="zoom:50%;" /></p>
+<h3 id="关联容器操作"><a href="#关联容器操作" class="headerlink" title="关联容器操作"></a>关联容器操作</h3><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628171329.jpg" alt="20200628171329" style="zoom:50%;" />  
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt;::value_type v1;<span class="comment">//v1是一个 string</span></span><br><span class="line"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt;::key_type v2;<span class="comment">//v2是一个 string</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;::value_type v3;<span class="comment">//v3是一个pair&lt;const string,int&gt;</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;::key_type v4;<span class="comment">//v4是一个 string</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;::mapped_type v5;<span class="comment">//w5是一个int</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="关联容器迭代器"><a href="#关联容器迭代器" class="headerlink" title="关联容器迭代器"></a>关联容器迭代器</h4><p>对关联容器迭代器进行解引用，得到关联容器的value_type的值的引用。<br>set迭代器是const的。<br>关联容器和算法：通常不对关联容器使用泛型算法。关联容器的关键字是 const这一特性意味着不能将关联容器传递给修改或重排容器元素的算法。利用关联容器定义的find算法查找一个元素。</p>
+<h4 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h4><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628194956.jpg" alt="20200628194956" style="zoom:50%;" />  
+insert(或 emplace)返回一个pair，pair的 first成员是一个迭代器,指向具有给定关键字的元素; second成员是一个bool值,指出元素是插入成功还是已经存在于容器中(关键字若在容器中,则 insert什么事情也不做,且返回值中的bool部分为false)。
+
+<h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628201829.jpg" alt="20200628201829" style="zoom:50%;" />
+
+<h4 id="map的下标操作"><a href="#map的下标操作" class="headerlink" title="map的下标操作"></a>map的下标操作</h4><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628202224.jpg" alt="20200628202224" style="zoom:50%;" />  
+
+<h4 id="访问元素"><a href="#访问元素" class="headerlink" title="访问元素"></a>访问元素</h4><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628203233.jpg" alt="20200628203233" style="zoom:50%;" /> 
+
+<p><strong>equal_range函数</strong>：函数接受一个关键字,返回一个迭代器pair。若关键字存在,则第一个迭代器指向第一个与关键字匹配的元素,第二个选代器指向最后一个匹配元素之后的位置。若未找到匹配元素,则两个迭代器都指向关键字可以插入的位置。</p>
+<h4 id="一个单词转换的map"><a href="#一个单词转换的map" class="headerlink" title="一个单词转换的map"></a>一个单词转换的map</h4><h3 id="无序容器"><a href="#无序容器" class="headerlink" title="无序容器"></a>无序容器</h3><p>新标准定义了4个无序关联容器。这些容器不是使用比较运算符来组织元素,而是使用一个哈希函数( hash function)和关键字类型的=运算符。<br><strong>管理桶</strong>：无序容器在存储上组织为一组桶,每个桶保存零个或多个元素。无序容器使用一个哈希函数将元素映射到桶。<br><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628223820.jpg" alt="20200628223820" style="zoom:50%;" /><br><strong>无序容器对关键字类型的要求</strong>：默认情况下,无序容器使用关键字类型的=运算符来比较元素,还使用一个hash&lt; key_type&gt;类型的对象来生成每个元素的哈希值。标准库为内置类型(包括指针)，一些标准库类型，智能指针类型提供了hash模板。因此,可以直接这些类型的无序容器。<br>因此，不能直接定义关键字类型为自定义类类型的无序容器。需要提供自己的hash模板版本。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">hasher</span><span class="params">(<span class="keyword">const</span> sales_data &amp;sd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> hash&lt;<span class="built_in">string</span>&gt;()(sd.isbn());</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">eqop</span><span class="params">(<span class="keyword">const</span> Sales_data &amp;lhs, <span class="keyword">const</span> sales_data &amp;rhs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> lhs.isbn() == rhs.isbn();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//自定义unorder_multiset</span></span><br><span class="line"><span class="keyword">using</span> SD_multiset unordered = <span class="built_in">multiset</span>&lt;sales_data,<span class="keyword">decltype</span>(hasher)*, <span class="keyword">decltype</span>(egop)*&gt;;</span><br><span class="line"><span class="comment">//参数是桶大小、哈希函数指针和相等性判断运算符指针</span></span><br><span class="line"><span class="function">SD_multiset <span class="title">bookstore</span><span class="params">(<span class="number">42</span>, hasher, gop)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="1-4"><a href="#1-4" class="headerlink" title="1-4"></a>1-4</h3><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200623/20200623231549.jpg" alt="20200623231549" style="zoom:50%;" />  
+
+<p>练习1<br>答：map是键-值对的集合，可以通过键进行值的查找。 向量是对象的集合，每个对象都有一个关联的索引，提供了对该对象的访问。<br>练习2<br>答：  </p>
+<ul>
+<li>list : a to-do list. always need insert or delete the elements anywhere.</li>
+<li>vector : save some important associated data, always need query elements by index.</li>
+<li>deque : message handle. FIFO.</li>
+<li>map : dictionary.</li>
+<li>set : bad_checks.</li>
+</ul>
+<p>练习3：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//统计输入中每个单词出现的次数</span></span><br><span class="line">	<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">size_t</span>&gt; word_count;<span class="comment">// string到size_t的空map</span></span><br><span class="line">	<span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; exclude = &#123; <span class="string">"The"</span>,<span class="string">"But"</span>,<span class="string">"And"</span>,<span class="string">"Or"</span>,<span class="string">"AnAthe"</span>,<span class="string">"but"</span>,<span class="string">"and"</span>,<span class="string">"or"</span>,<span class="string">"an"</span>,<span class="string">"a"</span> &#125;; </span><br><span class="line">	<span class="built_in">string</span> <span class="keyword">word</span>; </span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; <span class="keyword">word</span>) <span class="comment">// 只统计不在exc1ude中的单词</span></span><br><span class="line">		<span class="keyword">if</span>(exclude.<span class="built_in">find</span>(<span class="keyword">word</span>) == exclude.<span class="built_in">end</span>())</span><br><span class="line">			++word_count[<span class="keyword">word</span>];<span class="comment">//获取并递增word的计数器</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>练习4：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="5-8"><a href="#5-8" class="headerlink" title="5-8"></a>5-8</h3><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200623/20200623232529.jpg" alt="20200623232529" style="zoom:50%;" />  
+练习5：
+答：
+
+<ul>
+<li>set：元素类型为关键字类型。</li>
+<li>map：使用键-值对，例如{key, value}来表示来自map中一个元素。</li>
+</ul>
+<p>当只需要存储关键字时，使用set；如果需要存储键值对，则使用map。<br>练习6：<br>答：set是中的元素是唯一且有序的，而list都不是。 使用哪个取决于元素是否唯一和是否需要按序存储。<br>练习7：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; family_info;</span><br><span class="line">	family_info[<span class="string">"Smith"</span>].push_back(<span class="string">"Gayle"</span>);</span><br><span class="line">	family_info[<span class="string">"Smith"</span>].push_back(<span class="string">"Will"</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> family : family_info)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span> name : family.second)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; name &lt;&lt; <span class="string">" "</span> &lt;&lt; family.first &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>练习8<br>答：  <a href="http://stackoverflow.com/questions/8686725/what-is-the-difference-between-stdset-and-stdvector" target="_blank" rel="noopener">参考</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; unsorted_vec;</span><br><span class="line">	<span class="built_in">string</span> s;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; s)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">auto</span> iter = <span class="built_in">find</span>(unsorted_vec.cbegin(), unsorted_vec.cend(), s);</span><br><span class="line">		<span class="keyword">if</span> (iter == unsorted_vec.cend())</span><br><span class="line">			unsorted_vec.push_back(s);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> s : unsorted_vec)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="9-11"><a href="#9-11" class="headerlink" title="9-11"></a>9-11</h3><p>练习9：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;&gt; words;</span><br></pre></td></tr></table></figure>
+<p>练习10：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">	<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; lis;</span><br><span class="line">	<span class="comment">//都能被声明</span></span><br><span class="line">	<span class="built_in">map</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator, <span class="keyword">int</span>&gt; vec_map;</span><br><span class="line">	<span class="built_in">map</span>&lt;<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;::iterator, <span class="keyword">int</span>&gt; lis_map;</span><br><span class="line">	vec_map.insert(pair&lt; <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator, <span class="keyword">int</span>&gt;(vec.<span class="built_in">begin</span>(),<span class="number">0</span>));</span><br><span class="line">	<span class="comment">//编译时出错，二进制“&lt;”:“const _Ty”不定义该运算符或到预定义运算符可接收的类型的转换	</span></span><br><span class="line">	lis_map.insert(pair&lt; <span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;::iterator, <span class="keyword">int</span>&gt;(lis.<span class="built_in">begin</span>(), <span class="number">0</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>练习11：  </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">multiset&lt;Sales_data, bool(*)(const Sales data &amp;lhs, const Sales data &amp;rhs)&gt; bookstore(compareIsbn);</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-14"><a href="#12-14" class="headerlink" title="12-14"></a>12-14</h3><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628165704.jpg" alt="20200628165704" style="zoom:50%;" /> 
+
+<p>练习12：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;pair&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt;&gt; vec;</span><br><span class="line">	<span class="built_in">string</span> str;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; str &gt;&gt; i)</span><br><span class="line">	&#123;</span><br><span class="line">		vec.push_back(&#123; str, i &#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> p : vec)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; p.first &lt;&lt; <span class="string">":"</span> &lt;&lt; p.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>练习13：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//vec.push_back(&#123; str, i &#125;);</span></span><br><span class="line"><span class="comment">//vec.push_back(pair&lt;string, int&gt;(str, i));</span></span><br><span class="line"><span class="comment">//vec.push_back(make_pair(str, i));</span></span><br><span class="line"><span class="comment">//vec.emplace_back(str, i);</span></span><br></pre></td></tr></table></figure>
+<p>练习14：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::ostream;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::make_pair;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::pair;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">vector</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">map</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Families</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">using</span> Child = pair&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;;</span><br><span class="line">    <span class="keyword">using</span> Children = <span class="built_in">vector</span>&lt;Child&gt;;</span><br><span class="line">    <span class="keyword">using</span> Data = <span class="built_in">map</span>&lt;<span class="built_in">string</span>, Children&gt;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="built_in">string</span> <span class="keyword">const</span>&amp; last_name, <span class="built_in">string</span> <span class="keyword">const</span>&amp; first_name, <span class="built_in">string</span> birthday)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        _data[last_name].push_back(make_pair(first_name, birthday));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ostream&amp; <span class="title">print</span><span class="params">(<span class="built_in">std</span>::ostream&amp; os)</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (_data.empty()) <span class="keyword">return</span> os &lt;&lt; <span class="string">"No data right now."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; pair : _data) &#123;</span><br><span class="line">            os &lt;&lt; pair.first &lt;&lt; <span class="string">":\n"</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; child : pair.second)</span><br><span class="line">                os &lt;&lt; child.first &lt;&lt; <span class="string">" "</span> &lt;&lt; child.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            os &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> os;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Data _data;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Families families;</span><br><span class="line">    <span class="built_in">string</span> message = <span class="string">"Please enter last name, first name and birthday"</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">string</span> l, f, b; <span class="built_in">cout</span> &lt;&lt; message &lt;&lt; <span class="built_in">endl</span>, <span class="built_in">cin</span> &gt;&gt; l &gt;&gt; f &gt;&gt; b;</span><br><span class="line">        families.add(l, f, b))</span><br><span class="line">        ;</span><br><span class="line">    families.<span class="built_in">print</span>(<span class="built_in">cout</span> &lt;&lt; <span class="string">"Current data:"</span> &lt;&lt; <span class="built_in">endl</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="15-19"><a href="#15-19" class="headerlink" title="15-19"></a>15-19</h3><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628172639.jpg" alt="20200628172639" style="zoom:50%;" />  
+
+<p>练习15：<br>答：mapped_type表示vector<int>，key_type表示int，value_type表示pair&lt;const int, vector<int>&gt;.   </p>
+<p>练习16：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt; <span class="built_in">map</span>;</span><br><span class="line"><span class="built_in">map</span>[<span class="number">25</span>] = <span class="string">"Alan"</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt;::iterator it = <span class="built_in">map</span>.<span class="built_in">begin</span>();</span><br><span class="line">it-&gt;second = <span class="string">"Wang"</span>;</span><br></pre></td></tr></table></figure>
+<p>练习17：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">copy(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), inserter(c, c.<span class="built_in">end</span>())); <span class="comment">// legal</span></span><br><span class="line">copy(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), back_inserter(c)); <span class="comment">// illegal, no `push_back` in `set`.</span></span><br><span class="line">copy(c.<span class="built_in">begin</span>(), c.<span class="built_in">end</span>(), inserter(v, v.<span class="built_in">end</span>())); <span class="comment">// legal.</span></span><br><span class="line">copy(c.<span class="built_in">begin</span>(), c.<span class="built_in">end</span>(), back_inserter(v)); <span class="comment">// legal.</span></span><br></pre></td></tr></table></figure>
+<p>练习18：<br>答：  std::map&lt;std::string, size_t&gt;::const_iterator map_it = word_count.cbegin(); </p>
+<p>练习19：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> compareType = <span class="keyword">bool</span> (*)(<span class="keyword">const</span> Sales_data &amp;lhs, <span class="keyword">const</span> Sales_data &amp;rhs);</span><br><span class="line">std::multiset&lt;Sales_data, compareType&gt; bookstore(compareIsbn);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">multiset</span>&lt;Sales_data, compareType&gt;::iterator c_it = bookstore.<span class="built_in">begin</span>();</span><br></pre></td></tr></table></figure>
+<h3 id="20-23"><a href="#20-23" class="headerlink" title="20-23"></a>20-23</h3><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628195819.jpg" alt="20200628195819" style="zoom:50%;" />  
+
+<p>练习20：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//统计输入中每个单词出现的次数</span></span><br><span class="line">	<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">size_t</span>&gt; word_count;<span class="comment">// string到size_t的空map</span></span><br><span class="line">	<span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; exclude = &#123; <span class="string">"The"</span>,<span class="string">"But"</span>,<span class="string">"And"</span>,<span class="string">"Or"</span>,<span class="string">"AnAthe"</span>,<span class="string">"but"</span>,<span class="string">"and"</span>,<span class="string">"or"</span>,<span class="string">"an"</span>,<span class="string">"a"</span> &#125;; </span><br><span class="line">	<span class="built_in">string</span> <span class="keyword">word</span>; </span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; <span class="keyword">word</span>) <span class="comment">// 只统计不在exc1ude中的单词</span></span><br><span class="line">		<span class="keyword">if</span> (exclude.<span class="built_in">find</span>(<span class="keyword">word</span>) == exclude.<span class="built_in">end</span>())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//++word_count[word];//获取并递增word的计数器</span></span><br><span class="line">			<span class="keyword">auto</span> it = word_count.insert(make_pair(<span class="keyword">word</span>, <span class="number">1</span>));</span><br><span class="line">			<span class="keyword">if</span> (!it.second)</span><br><span class="line">				++it.first-&gt;second;</span><br><span class="line">		&#125;	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>练习21：<br>答：循环体中的语句向map中所对应的word关键字的值加1.<br>练习22：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; s_map;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; i_vec = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span> &#125;;</span><br><span class="line">	<span class="comment">//参数类型：pair&lt;string, vector&lt;int&gt;&gt;</span></span><br><span class="line">	<span class="comment">//返回类型：pair&lt;map&lt;string, vector&lt;int&gt;&gt;::iterator, bool&gt;</span></span><br><span class="line">	s_map.insert(make_pair(<span class="string">"hello"</span>, i_vec));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>练习23：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">multimap</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; families;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">string</span> lastName, childName; <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; childName &gt;&gt; lastName;</span><br><span class="line">         families.emplace(lastName, childName))</span><br><span class="line">        ;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; s : families)</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; s.second &lt;&lt; <span class="string">" "</span> &lt;&lt; s.first &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="24-26"><a href="#24-26" class="headerlink" title="24-26"></a>24-26</h3><p>练习24：<br>答：向m中插入一个键值对，其关键字为0，对应值为1. </p>
+<p>练习25： </p>
+<p>答：程序报错，v是一个空vector，不能使用下标运算符。<br>练习26：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt; <span class="built_in">map</span> = &#123;&#123;<span class="number">1</span>, <span class="string">"ss"</span>&#125;, &#123;<span class="number">2</span>, <span class="string">"sz"</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt;::key_type type_to_subscript = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//! ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span></span><br><span class="line">    <span class="comment">//! that is, int.</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt;::mapped_type type_to_return =</span><br><span class="line">        <span class="built_in">map</span>[type_to_subscript];</span><br><span class="line">    <span class="comment">//! ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span></span><br><span class="line">    <span class="comment">//! that is, std::string</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="27-32"><a href="#27-32" class="headerlink" title="27-32"></a>27-32</h3><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628210408.jpg" alt="20200628210408" style="zoom:50%;" /> 
+
+<p>练习27：<br>答：如果关联容器中的元素允许重复则使用count，否则一般使用find。</p>
+<p>练习28：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; s_map = &#123; &#123;<span class="string">"hello"</span>, <span class="number">1</span>&#125;, &#123;<span class="string">"world"</span>, <span class="number">2</span>&#125; &#125;;</span><br><span class="line">	<span class="keyword">auto</span> if_find = s_map.<span class="built_in">find</span>(<span class="string">"hello"</span>);</span><br><span class="line">	<span class="keyword">if</span> (if_find != s_map.<span class="built_in">end</span>())</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; if_find-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>练习29：<br>答：如果元素不在 multimap中,lower_bound和upper_bound会返回相等的迭代器指向一个不影响排序的关键字插入位置。equal_range返回的pair，此pair的 first成员保存的迭代器与lower_bound返回的迭代器是一样的,second保存的迭代器与upper_bound的返回值是一样的。<br>练习30：<br>答：pos表示两个迭代器组成的pair，pair的第一个迭代器指向第一个与关键字匹配的元素，second表示所指向元素所对应的mapped_value。<br>练习31：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; production = &#123; &#123;<span class="string">"lu"</span>, <span class="string">"cpp"</span>&#125;, &#123;<span class="string">"lu"</span>, <span class="string">"linux"</span>&#125;, &#123;<span class="string">"tom"</span>, <span class="string">"mysql"</span>&#125; &#125;;</span><br><span class="line">	<span class="built_in">string</span> remove_ = <span class="string">"lu"</span>;</span><br><span class="line">	<span class="keyword">auto</span> iter = production.<span class="built_in">find</span>(remove_);</span><br><span class="line">	<span class="keyword">if</span> (iter != production.<span class="built_in">end</span>())</span><br><span class="line">		production.erase(remove_);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : production)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; i.first &lt;&lt; <span class="string">":"</span> &lt;&lt; i.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>练习32：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">multimap</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; authors&#123;</span><br><span class="line">        &#123;<span class="string">"alan"</span>, <span class="string">"DMA"</span>&#125;, &#123;<span class="string">"pezy"</span>, <span class="string">"LeetCode"</span>&#125;, &#123;<span class="string">"alan"</span>, <span class="string">"CLRS"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"wang"</span>, <span class="string">"FTP"</span>&#125;, &#123;<span class="string">"pezy"</span>, <span class="string">"CP5"</span>&#125;,      &#123;<span class="string">"wang"</span>, <span class="string">"CPP-Concurrency"</span>&#125;&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">multiset</span>&lt;<span class="built_in">string</span>&gt;&gt; order_authors;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; author : authors)</span><br><span class="line">        order_authors[author.first].insert(author.second);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; author : order_authors) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; author.first &lt;&lt; <span class="string">": "</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; work : author.second) <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; work &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="33-36"><a href="#33-36" class="headerlink" title="33-36"></a>33-36</h3><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628215256.jpg" alt="20200628215256" style="zoom:50%;" />  
+
+<p>练习33：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="built_in">string</span>&amp; <span class="title">transform</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span>&amp; s, <span class="keyword">const</span> <span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;&amp; m)</span> <span class="comment">// 实际的转换工作; 此部分是程序的核心</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">auto</span> map_it = m.<span class="built_in">find</span>(s);<span class="comment">//如果单词在转换规则map中</span></span><br><span class="line">	<span class="keyword">if</span> (map_it != m.cend())</span><br><span class="line">		<span class="keyword">return</span> map_it-&gt;second;<span class="comment">//使用替换短语</span></span><br><span class="line">	<span class="keyword">return</span> s;<span class="comment">//否则返回原 string</span></span><br><span class="line">&#125;</span><br><span class="line">map&lt;string, string&gt; buildMap(ifstream&amp; map_file)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; trans_map;<span class="comment">//保存转换规则</span></span><br><span class="line">	<span class="built_in">string</span> key;<span class="comment">//要转换的单词</span></span><br><span class="line">	<span class="built_in">string</span> value;<span class="comment">//替换后的内容</span></span><br><span class="line">	<span class="comment">//读取第一个单词存入key中,行中剩余内容存入va1ue</span></span><br><span class="line">	<span class="keyword">while</span> (map_file &gt;&gt; key &amp;&amp; getline(map_file, value))</span><br><span class="line">		<span class="keyword">if</span> (value.<span class="built_in">size</span>() &gt; <span class="number">1</span>)<span class="comment">//检查是否有转换规则</span></span><br><span class="line">			trans_map[key] = value.substr(<span class="number">1</span>);<span class="comment">//跳过前导空格</span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">throw</span> runtime_error(<span class="string">"no rule for "</span> + key);</span><br><span class="line">	<span class="keyword">return</span> trans_map;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">word_ransform</span><span class="params">(ifstream&amp; map_file, ifstream&amp; input)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">auto</span> trans_map = buildMap(map_file);<span class="comment">//保存转换规则</span></span><br><span class="line">	<span class="built_in">string</span> <span class="built_in">text</span>;<span class="comment">// 保存输入中的每一行</span></span><br><span class="line">	<span class="keyword">while</span> (getline(input, <span class="built_in">text</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//读取一行输入</span></span><br><span class="line">		<span class="function"><span class="built_in">istringstream</span> <span class="title">stream</span><span class="params">(<span class="built_in">text</span>)</span></span>;<span class="comment">//读取每个单词</span></span><br><span class="line">		<span class="built_in">string</span> <span class="keyword">word</span>;</span><br><span class="line">		<span class="keyword">bool</span> firstword = <span class="literal">true</span>; <span class="comment">//控制是否打印空格</span></span><br><span class="line">		<span class="keyword">while</span> (stream &gt;&gt; <span class="keyword">word</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (firstword)</span><br><span class="line">				firstword = <span class="literal">false</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span>; <span class="comment">// 在单词间打印一个空格</span></span><br><span class="line">			<span class="comment">//transform返回它的第一个参数或其转换之后的形式</span></span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; transform(<span class="keyword">word</span>, trans_map);<span class="comment">//打印输出</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//完成一行的转换</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>练习34：<br>答：因为std::map的运算符未声明为const，但m被声明为对std::map的常量引用。如果插入新的pair，将导致错误。<br>练习35：  </p>
+<ul>
+<li>使用下标运算符：如果一个单词在文件中多次出现，循环会将最后一个对应的短语放入trans_map中。</li>
+<li>使用insert，如果一个单词多次出现，循环会将第一个对应的短语放入trans_map。</li>
+</ul>
+<p>练习36：<br>答：程序不会受到影响。</p>
+<h3 id="37-38"><a href="#37-38" class="headerlink" title="37-38"></a>37-38</h3><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200628/20200628224902.jpg" alt="20200628224902" style="zoom:50%;" />  
+
+<p>练习37：  </p>
+<ul>
+<li>无序容器的优点：当关键字类型在元素之间没有明显的排序关系时很有用；对于维护元素顺序的成本过高的应用很有用。</li>
+<li>有序版本的优点：有序容器的迭代器按关键字顺序访问元素；可以直接定义一个有序的容器，该容器使用我们自己的类类型作为其键类型。<br>练习38：  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wordCounting</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">size_t</span>&gt; word_count;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">string</span> <span class="keyword">word</span>; <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; <span class="keyword">word</span>; ++word_count[<span class="keyword">word</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; w : word_count)</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; w.first &lt;&lt; <span class="string">" occurs "</span> &lt;&lt; w.second</span><br><span class="line">                  &lt;&lt; (w.second &gt; <span class="number">1</span> ? <span class="string">"times"</span> : <span class="string">"time"</span>) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wordTransformation</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::ifstream ifs_map("../data/word_transformation.txt"),</span><br><span class="line">        ifs_content(<span class="string">"../data/given_to_transform.txt"</span>);</span><br><span class="line">    <span class="keyword">if</span> (!ifs_map || !ifs_content) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"can't find the documents."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; trans_map;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">string</span> key, value; ifs_map &gt;&gt; key &amp;&amp; getline(ifs_map, value);)</span><br><span class="line">        <span class="keyword">if</span> (value.<span class="built_in">size</span>() &gt; <span class="number">1</span>)</span><br><span class="line">            trans_map[key] =</span><br><span class="line">                value.substr(<span class="number">1</span>).substr(<span class="number">0</span>, value.find_last_not_of(<span class="string">' '</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">string</span> <span class="built_in">text</span>, <span class="keyword">word</span>; getline(ifs_content, <span class="built_in">text</span>); <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>)</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">istringstream</span> iss(<span class="built_in">text</span>); iss &gt;&gt; <span class="keyword">word</span>;) &#123;</span><br><span class="line">            <span class="keyword">auto</span> map_it = trans_map.<span class="built_in">find</span>(<span class="keyword">word</span>);</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; (map_it == trans_map.cend() ? <span class="keyword">word</span> : map_it-&gt;second)</span><br><span class="line">                      &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// wordCounting();</span></span><br><span class="line">    wordTransformation();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-Primer%E7%AC%94%E8%AE%B0/" rel="tag"># C++Primer笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/bcf3d99d.html" rel="prev" title="第十章 泛型算法">
+      <i class="fa fa-chevron-left"></i> 第十章 泛型算法
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">1.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用关联容器"><span class="nav-number">1.1.</span> <span class="nav-text">使用关联容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联容器概述"><span class="nav-number">1.2.</span> <span class="nav-text">关联容器概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义关联容器"><span class="nav-number">1.2.1.</span> <span class="nav-text">定义关联容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关键字类型要求"><span class="nav-number">1.2.2.</span> <span class="nav-text">关键字类型要求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pair类型"><span class="nav-number">1.2.3.</span> <span class="nav-text">pair类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联容器操作"><span class="nav-number">1.3.</span> <span class="nav-text">关联容器操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关联容器迭代器"><span class="nav-number">1.3.1.</span> <span class="nav-text">关联容器迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加元素"><span class="nav-number">1.3.2.</span> <span class="nav-text">添加元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除元素"><span class="nav-number">1.3.3.</span> <span class="nav-text">删除元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#map的下标操作"><span class="nav-number">1.3.4.</span> <span class="nav-text">map的下标操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问元素"><span class="nav-number">1.3.5.</span> <span class="nav-text">访问元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一个单词转换的map"><span class="nav-number">1.3.6.</span> <span class="nav-text">一个单词转换的map</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无序容器"><span class="nav-number">1.4.</span> <span class="nav-text">无序容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">2.</span> <span class="nav-text">练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4"><span class="nav-number">2.1.</span> <span class="nav-text">1-4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-8"><span class="nav-number">2.2.</span> <span class="nav-text">5-8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-11"><span class="nav-number">2.3.</span> <span class="nav-text">9-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-14"><span class="nav-number">2.4.</span> <span class="nav-text">12-14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-19"><span class="nav-number">2.5.</span> <span class="nav-text">15-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-23"><span class="nav-number">2.6.</span> <span class="nav-text">20-23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-26"><span class="nav-number">2.7.</span> <span class="nav-text">24-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-32"><span class="nav-number">2.8.</span> <span class="nav-text">27-32</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-36"><span class="nav-number">2.9.</span> <span class="nav-text">33-36</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#37-38"><span class="nav-number">2.10.</span> <span class="nav-text">37-38</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lu Qi"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lu Qi</p>
+  <div class="site-description" itemprop="description">真正的大师永远都怀着一颗学徒的心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luqicoder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luqicoder" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:luqicoder@foxmail.com" title="E-Mail → mailto:luqicoder@foxmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备19002966号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lu Qi</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
