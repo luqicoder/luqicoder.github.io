@@ -134,7 +134,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a>
 
   </li>
         <li class="menu-item menu-item-commonweal">
@@ -281,6 +281,122 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/f5c8e179.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lu Qi">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder67's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/f5c8e179.html" class="post-title-link" itemprop="url">基于深度学习的人脸识别系统</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-15 01:12:35 / 修改时间：01:12:16" itemprop="dateCreated datePublished" datetime="2021-04-15T01:12:35+08:00">2021-04-15</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/posts/f5c8e179.html#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" id="/posts/f5c8e179.html" data-xid="/posts/f5c8e179.html" itemprop="commentCount"></span>
+    </a>
+ </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="人脸识别介绍"><a href="#人脸识别介绍" class="headerlink" title="人脸识别介绍"></a>人脸识别介绍</h2><p><strong>提示</strong>：<strong>此处只是简单对人脸识别进行介绍，建议查看参考文献详细了解</strong>。</p>
+<p>(广义)人脸识别（Face Recognition），是指对输入的图像或视频，判断其中是否存在人脸，进而依据人脸的面部特征，自动进行身份识别。<br>包括<strong>人脸检测</strong>，<strong>人脸对齐</strong>，<strong>特征提取</strong>，<strong>人脸匹配</strong>四个过程。</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210328/20210328210052.jpg" alt="20210328210052" style="zoom:70%;" />
+
+<h3 id="人脸检测"><a href="#人脸检测" class="headerlink" title="人脸检测"></a>人脸检测</h3><p>人脸检测，在给定的人脸图像中， 找到图像中人脸的位置，并（如果有的话）返回每个人脸的边界框的坐标。<br>人脸通常会用一个个矩形框框起来。</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210328/20210328210119.jpg" alt="20210328210119" style="zoom:70%;" />
+
+<h3 id="人脸对齐"><a href="#人脸对齐" class="headerlink" title="人脸对齐"></a>人脸对齐</h3><p>人脸对齐的目标是使用位于图像固定位置的一组参考点以相同的方式缩放和裁剪人脸图像。(有时候检测到的人脸是歪的，斜的，需要将人脸进行对齐，对齐之后再识别。)<br>需要使用人脸特征点检测器找到一组人脸特征点坐标，然后在2D对齐的情况下，利用合适的参考点进行仿射变换。</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210328/20210328210140.jpg" alt="20210328210140" style="zoom:70%;" />
+
+<h3 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h3><p>特征提取(人脸表示)。 将人脸图像的像素值转换为紧凑而有区别的特征向量。<br>理想情况下，同一对象的所有人脸都应映射到相似的特征向量。<br>包括传统方法(基于某些特征算子)和深度学习方法。</p>
+<p>常见的基于深度学习的人脸识别算法：</p>
+<ul>
+<li>caffeFace：<a href="https://github.com/ydwen/caffe-face" target="_blank" rel="noopener">https://github.com/ydwen/caffe-face</a></li>
+<li>normFace：<a href="https://github.com/happynear/NormFace" target="_blank" rel="noopener">https://github.com/happynear/NormFace</a></li>
+<li>mobile ID： <a href="https://github.com/liuziwei7/mobile-id" target="_blank" rel="noopener">https://github.com/liuziwei7/mobile-id</a></li>
+<li>sphereFace： <a href="https://github.com/wy1iu/sphereface" target="_blank" rel="noopener">https://github.com/wy1iu/sphereface</a></li>
+<li>Arcface: <a href="https://github.com/deepinsight/insightface" target="_blank" rel="noopener">https://github.com/deepinsight/insightface</a></li>
+</ul>
+<h3 id="人脸匹配"><a href="#人脸匹配" class="headerlink" title="人脸匹配"></a>人脸匹配</h3><p>人脸匹配，特征提取完成之后，需要用一种度量的方法来判断两个特征向量的距离，从而判断两个图片是否是同一个人。</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210328/20210328205431.jpg" alt="20210328205431" style="zoom:70%;" />
+
+<h2 id="人脸识别系统"><a href="#人脸识别系统" class="headerlink" title="人脸识别系统"></a>人脸识别系统</h2><p>人脸检测用的MTCNN，人脸识别用的Arcface，基于pytorch。<br>使用python Tkinter开发的界面。</p>
+<img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210328/20210328210601.jpg" alt="20210328210601" style="zoom:70%;" />
+
+<h3 id="演示界面"><a href="#演示界面" class="headerlink" title="演示界面"></a>演示界面</h3><img src="https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20210328/20210328210632.jpg" alt="20210328210632" style="zoom:70%;" />
+
+<h3 id="演示视频"><a href="#演示视频" class="headerlink" title="演示视频"></a>演示视频</h3><p><a href="https://www.bilibili.com/video/BV1Zi4y1P7iq" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1Zi4y1P7iq</a></p>
+<p>GITHUB:<a href="https://github.com/luqicoder/FR-system" target="_blank" rel="noopener">https://github.com/luqicoder/FR-system</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] Zhang, K., Zhang, Z., Li, Z., and Qiao, Y. (2016). Joint face detection and alignment using multitask cascaded convolutional networks. IEEE Signal Processing Letters, 23(10):1499–1503.<br>[2] <a href="https://arxiv.org/abs/1811.00116v1" target="_blank" rel="noopener">Face Recognition: From Traditional to Deep Learning Methods</a><br>[3] 大学生写人脸识别算法现实吗？ - 卡本特的回答 - 知乎<br><a href="https://www.zhihu.com/question/64860792/answer/233782977" target="_blank" rel="noopener">https://www.zhihu.com/question/64860792/answer/233782977</a><br>[4] 人脸识别的LOSS（上） - YaqiLYU的文章 - 知乎<br><a href="https://zhuanlan.zhihu.com/p/34404607" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34404607</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/d153ce31.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -306,7 +422,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-03-19 17:01:46 / 修改时间：17:15:19" itemprop="dateCreated datePublished" datetime="2021-03-19T17:01:46+08:00">2021-03-19</time>
+              <time title="创建时间：2021-03-19 17:01:46 / 修改时间：17:15:45" itemprop="dateCreated datePublished" datetime="2021-03-19T17:01:46+08:00">2021-03-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1107,109 +1223,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coder67.cn/posts/1ab30d74.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lu Qi">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder67's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/1ab30d74.html" class="post-title-link" itemprop="url">02-启动、中断、异常和系统调用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-03-04 21:52:00 / 修改时间：22:39:11" itemprop="dateCreated datePublished" datetime="2021-03-04T21:52:00+08:00">2021-03-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/posts/1ab30d74.html#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/posts/1ab30d74.html" data-xid="/posts/1ab30d74.html" itemprop="commentCount"></span>
-    </a>
- </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&emsp;&emsp;<a href="https://www.bilibili.com/video/BV1uW411f72n" target="_blank" rel="noopener">清华大学计算机操作系统课程笔记</a><br>&emsp;&emsp;<strong>启动、中断、异常和系统调用</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/1ab30d74.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1281,7 +1294,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1340,12 +1353,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">121k</span>
+    <span title="站点总字数">122k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:50</span>
+    <span title="站点阅读时长">1:51</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
