@@ -12,18 +12,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
         with:
-          fetch-depth: 0
-      - name: Disable quotePath
-        run: git config --global core.quotePath false
+            submodules: 'recursive'
+        # Start ssh-agent but set it to use the same ssh_auth_sock value.
+        # The agent will be running in all steps after this, so it
+        # should be one of the first.
+      - name: setup npm
+        uses: actions/setup-node@v2
+        with:
+            node-version: '14'
+      - name: install npm
+        run: npm install
       - name: setup hugo
         uses: peaceiris/actions-hugo@v2
         with:
             hugo-version: 'latest'
+            extended: true
       - name: build hugo
         run: hugo --gc --minify --cleanDestinationDir
       - name: deploy hugo
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          PUBLISH_BRANCH: master
-          PUBLISH_DIR: ./public
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_branch: master  # default: gh-pages
+          publish_dir: ./public
