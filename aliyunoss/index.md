@@ -9,7 +9,7 @@
 &emsp;&emsp;一直都想解决如何快速上传图片到图床问题。以前每次写博客的时候，需要插入图片的时都是先把图片截取下来，保存到本地，然后通过网页的方式上传到阿里云，最后再获取上传的图片链接。通过这一系列的步骤，其实让人感觉挺麻烦的，所以自己都尽量避免在博客中插入图片。
 &emsp;&emsp;quicker是不久前才接触到，当时是为了解决论文翻译的问题（这里强烈安利一波沙拉查词+quicker的方式，真的是看英文文献的神器）。quicker有点像脚本精灵的意思，通过组合一系列动作，以达到快速完成某个任务的目的。使用了一段时间后，就有了开发这个阿里云oss快速上传动作的想法，下面是动作的效果图：
 
-![Alt text](https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/gif/aliyun_oss_gif.gif )
+![Alt text](https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/gif/aliyun_oss_gif.gif "演示效果" )
 
 ### 环境要求
 
@@ -31,7 +31,8 @@ pip install sys
 * Bucket名字
 * Bucket的根文件夹（即文件需要保存在Bucket的哪个文件夹下面）
 * 选择本地文件夹用于存放截取的图片(例如下图中**quicker_screen_shot**)
-* ![Alt text](https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200605/20200605002558.jpg)
+  
+  ![Alt text](https://bucket-coder67.oss-cn-shenzhen.aliyuncs.com/hexo/20200605/20200605002558.jpg "本地quicker_screen_shot文件夹")
 
   在上图中，以一串时间当做文件名的图片为我们自己截取的图片，所有文件均上传至阿里云oss(如果本地不需要可自行删除)；
 
